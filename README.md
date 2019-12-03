@@ -1,1 +1,1 @@
-# upgrades Newton to Rocky JCB style
+# Upgrades Newton to Rocky JCB style
