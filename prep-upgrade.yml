@@ -1,0 +1,16 @@
+- name: Prep out controllers for upgrade
+  hosts: lxc_hosts #,galera
+  gather_facts: false
+  tasks:
+    - name: Remove MariaDB Repo
+      file:
+        state: absent
+        path: /etc/apt/sources.list.d/MariaDB.list
+    - name: Remove pip config from etc
+      file:
+        state: absent
+        path: /etc/pip.conf
+    - name: Remove pip config from root
+      file:
+        state: absent
+        path: /root/.pip

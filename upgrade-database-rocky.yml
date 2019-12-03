@@ -1,0 +1,34 @@
+---
+
+- name: Prepare Virt Environments
+  hosts: localhost
+  tasks:
+    - name: Perform rocky Keystone DB sync
+      shell: "/root/upgrade-venvs/rocky/bin/keystone-manage db_sync"
+
+    - name: Perform rocky glance DB sync
+      shell: "/root/upgrade-venvs/rocky/bin/glance-manage db sync"
+
+    - name: Perform rocky cinder DB sync
+      shell: "/root/upgrade-venvs/rocky/bin/cinder-manage db sync"
+
+      #    - name: Perform online data migrations rocky cinder
+      #shell: "/root/upgrade-venvs/rocky/bin/cinder-manage db online_data_migrations"
+
+    - name: Perform rocky Nova API DB sync
+      shell: "/root/upgrade-venvs/rocky/bin/nova-manage api_db sync"
+
+    - name: Perform rocky Nova DB sync
+      shell: "/root/upgrade-venvs/rocky/bin/nova-manage db sync"
+
+#    - name: Perform rocky online data migrations
+#      shell: "/root/upgrade-venvs/rocky/bin/nova-manage db online_data_migrations"
+
+    - name: Perform rocky neutron DB upgrade
+      shell: "/root/upgrade-venvs/rocky/bin/neutron-db-manage upgrade --expand"
+
+    - name: Perform rocky neutron DB offline migrations
+      shell: "/root/upgrade-venvs/rocky/bin/neutron-db-manage has_offline_migrations"
+
+      #    - name: Perform rocky Horizon DB migrate
+      #shell: "/root/upgrade-venvs/rocky/bin/horizon-manage.py migrate --noinput"

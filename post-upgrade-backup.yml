@@ -1,0 +1,57 @@
+---
+
+- name: Prepare MQ/DB services
+  hosts: localhost
+  tasks:
+    - name: Dump database
+      shell: mysqldump --all-databases > /root/rocky-database.save
+
+#    - name: Pull database out of container
+#      fetch:
+#        src: /root/rocky-database.save
+#        dest: /root/rocky-database.save
+#        flat: true
+
+- name: start all containers
+  hosts: all_containers
+  gather_facts: false
+  user: root
+  tasks:
+    - name: start a container
+      lxc_container:
+        name: "{{ container_name }}"
+        state: "started"
+      delegate_to: "{{ physical_host }}"
+
+- name: Remove configs and logs
+  hosts: localhost
+  tasks:
+    - name: remove directory if it exists
+      file:
+        path: /etc/keystone
+        state: absent
+
+    - name: remove directory if it exists
+      file:
+        path: /etc/glance
+        state: absent
+
+    - name: remove directory if it exists
+      file:
+        path: /etc/cinder
+        state: absent
+
+    - name: remove directory if it exists
+      file:
+        path: /etc/nova
+        state: absent
+
+    - name: remove directory if it exists
+      file:
+        path: /etc/neutron
+        state: absent
+
+    - name: remove directory if it exists
+      file:
+        path: /etc/horizon
+        state: absent

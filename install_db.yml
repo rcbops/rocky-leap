@@ -1,0 +1,29 @@
+---
+
+#- name: Prepare MQ/DB services
+#  hosts: galera[0]
+#  tasks:
+#    - name: Copy database to galera container
+#      copy:
+#        src: /root/rocky-database.save
+#        dest: /root/rocky-database.save
+
+- name: import database
+  hosts: localhost
+  tasks:
+    - name: Bring in database
+      shell: mysql < /root/rocky-database.save
+
+#- name: Prepare Permissions
+#  hosts: galera_all
+#  tasks:
+#    - name: flush permissions
+#      shell: mysql -e 'FLUSH PRIVILEGES;'
+
+#- name: Prepare MQ/DB services
+#  hosts: galera_all
+#  tasks:
+#    - name: Copy database credentials to galera container
+#      copy:
+#        src: /root/.my.cnf.save
+#        dest: /root/.my.cnf

@@ -1,0 +1,450 @@
+---
+- name: Prepare Virt Environments
+  hosts: localhost
+#  environment:
+#    HTTP_PROXY: 'http://cloud-proxy.gslb2.comcast.com:8888'
+#    HTTPS_PROXY: 'http://cloud-proxy.gslb2.comcast.com:8888'
+  tasks:
+    - name: Install keystone requirements ocata
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/keystone/stable/ocata/requirements.txt
+        virtualenv: /root/upgrade-venvs/ocata
+        virtualenv_python: python2.7
+
+    - name: Install keystone requirements ocata pymysql
+      pip: 
+        name: pymysql
+        virtualenv: /root/upgrade-venvs/ocata
+        virtualenv_python: python2.7
+
+    - name: Install keystone requirements pike
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/keystone/stable/pike/requirements.txt
+        virtualenv: /root/upgrade-venvs/pike
+        virtualenv_python: python2.7
+
+    - name: Install keystone requirements pike pymysql
+      pip: 
+        name: pymysql
+        virtualenv: /root/upgrade-venvs/pike
+        virtualenv_python: python2.7
+
+    - name: Install keystone requirements queens
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/keystone/stable/queens/requirements.txt
+        virtualenv: /root/upgrade-venvs/queens
+        virtualenv_python: python2.7
+
+    - name: Install keystone requirements queens pymysql
+      pip: 
+        name: pymysql
+        virtualenv: /root/upgrade-venvs/queens
+        virtualenv_python: python2.7
+
+    - name: Install keystone requirements rocky
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/keystone/stable/rocky/requirements.txt
+        virtualenv: /root/upgrade-venvs/rocky
+        virtualenv_python: python2.7
+
+    - name: Install keystone requirements rocky pymysql
+      pip: 
+        name: pymysql
+        virtualenv: /root/upgrade-venvs/rocky
+        virtualenv_python: python2.7
+
+    - name: Install glance requirements ocata
+      pip: 
+        requirements: /root/upgrades/ocata-more-requirements.txt
+        virtualenv: /root/upgrade-venvs/ocata
+        virtualenv_python: python2.7
+
+    - name: Install glance requirements pike
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/glance/stable/pike/requirements.txt
+        virtualenv: /root/upgrade-venvs/pike
+        virtualenv_python: python2.7
+
+    - name: Install glance requirements queens
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/glance/stable/queens/requirements.txt
+        virtualenv: /root/upgrade-venvs/queens
+        virtualenv_python: python2.7
+
+    - name: Install glance requirements rocky
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/glance/stable/rocky/requirements.txt
+        virtualenv: /root/upgrade-venvs/rocky
+        virtualenv_python: python2.7
+
+    - name: Install cinder requirements ocata
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/cinder/stable/ocata/requirements.txt
+        virtualenv: /root/upgrade-venvs/ocata
+        virtualenv_python: python2.7
+
+    - name: Install cinder requirements pike
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/cinder/stable/pike/requirements.txt
+        virtualenv: /root/upgrade-venvs/pike
+        virtualenv_python: python2.7
+
+    - name: Install cinder requirements queens
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/cinder/stable/queens/requirements.txt
+        virtualenv: /root/upgrade-venvs/queens
+        virtualenv_python: python2.7
+
+    - name: Install cinder requirements rocky
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/cinder/stable/rocky/requirements.txt
+        virtualenv: /root/upgrade-venvs/rocky
+        virtualenv_python: python2.7
+
+    - name: Install nova requirements ocata
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/nova/stable/ocata/requirements.txt
+        virtualenv: /root/upgrade-venvs/ocata
+        virtualenv_python: python2.7
+
+    - name: Install nova requirements pike
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/nova/stable/pike/requirements.txt
+        virtualenv: /root/upgrade-venvs/pike
+        virtualenv_python: python2.7
+
+    - name: Install more requirements pike
+      pip: 
+        requirements: /root/upgrades/pike-more-requirements.txt
+        virtualenv: /root/upgrade-venvs/pike
+        virtualenv_python: python2.7
+
+    - name: Install nova requirements queens
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/nova/stable/queens/requirements.txt
+        virtualenv: /root/upgrade-venvs/queens
+        virtualenv_python: python2.7
+
+    - name: Install nova requirements rocky
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/nova/stable/rocky/requirements.txt
+        virtualenv: /root/upgrade-venvs/rocky
+        virtualenv_python: python2.7
+  
+    - name: Install neutron requirements ocata
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/neutron/stable/ocata/requirements.txt
+        virtualenv: /root/upgrade-venvs/ocata
+        virtualenv_python: python2.7
+
+    - name: Install neutron requirements pike
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/neutron/stable/pike/requirements.txt
+        virtualenv: /root/upgrade-venvs/pike
+        virtualenv_python: python2.7
+
+    - name: Install neutron requirements queens
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/neutron/stable/queens/requirements.txt
+        virtualenv: /root/upgrade-venvs/queens
+        virtualenv_python: python2.7
+  
+    - name: Install more requirements queens
+      pip: 
+        requirements: /root/upgrades/queens-more-requirements.txt
+        virtualenv: /root/upgrade-venvs/queens
+        virtualenv_python: python2.7
+
+    - name: Install neutron requirements rocky
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/neutron/stable/rocky/requirements.txt
+        virtualenv: /root/upgrade-venvs/rocky
+        virtualenv_python: python2.7
+  
+    - name: Install designate requirements ocata
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/designate/stable/ocata/requirements.txt
+        virtualenv: /root/upgrade-venvs/ocata
+        virtualenv_python: python2.7
+
+    - name: Install designate requirements pike
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/designate/stable/pike/requirements.txt
+        virtualenv: /root/upgrade-venvs/pike
+        virtualenv_python: python2.7
+  
+    - name: Install designate requirements queens
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/designate/stable/queens/requirements.txt
+        virtualenv: /root/upgrade-venvs/queens
+        virtualenv_python: python2.7
+  
+    - name: Install designate requirements rocky
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/designate/stable/rocky/requirements.txt
+        virtualenv: /root/upgrade-venvs/rocky
+        virtualenv_python: python2.7
+  
+    - name: Checkout keystone ocata
+      git:
+        repo: 'https://github.com/openstack/keystone.git'
+        dest: /root/upgrade-venvs/ocata/src/keystone
+        version: stable/ocata
+  
+    - name: Checkout keystone pike
+      git:
+        repo: 'https://github.com/openstack/keystone.git'
+        dest: /root/upgrade-venvs/pike/src/keystone
+        version: stable/pike
+  
+    - name: Checkout keystone queens
+      git:
+        repo: 'https://github.com/openstack/keystone.git'
+        dest: /root/upgrade-venvs/queens/src/keystone
+        version: stable/queens
+  
+    - name: Checkout keystone rocky
+      git:
+        repo: 'https://github.com/openstack/keystone.git'
+        dest: /root/upgrade-venvs/rocky/src/keystone
+        version: stable/rocky
+  
+    - name: Checkout glance ocata
+      git:
+        repo: 'https://github.com/openstack/glance.git'
+        dest: /root/upgrade-venvs/ocata/src/glance
+        version: stable/ocata
+  
+    - name: Checkout glance pike
+      git:
+        repo: 'https://github.com/openstack/glance.git'
+        dest: /root/upgrade-venvs/pike/src/glance
+        version: stable/pike
+  
+    - name: Checkout glance queens
+      git:
+        repo: 'https://github.com/openstack/glance.git'
+        dest: /root/upgrade-venvs/queens/src/glance
+        version: stable/queens
+  
+    - name: Checkout glance rocky
+      git:
+        repo: 'https://github.com/openstack/glance.git'
+        dest: /root/upgrade-venvs/rocky/src/glance
+        version: stable/rocky
+  
+    - name: Checkout cinder ocata
+      git:
+        repo: 'https://github.com/openstack/cinder.git'
+        dest: /root/upgrade-venvs/ocata/src/cinder
+        version: stable/ocata
+  
+    - name: Checkout cinder pike
+      git:
+        repo: 'https://github.com/openstack/cinder.git'
+        dest: /root/upgrade-venvs/pike/src/cinder
+        version: stable/pike
+  
+    - name: Checkout cinder queens
+      git:
+        repo: 'https://github.com/openstack/cinder.git'
+        dest: /root/upgrade-venvs/queens/src/cinder
+        version: stable/queens
+  
+    - name: Checkout cinder rocky
+      git:
+        repo: 'https://github.com/openstack/cinder.git'
+        dest: /root/upgrade-venvs/rocky/src/cinder
+        version: stable/rocky
+  
+    - name: Checkout nova ocata
+      git:
+        repo: 'https://github.com/openstack/nova.git'
+        dest: /root/upgrade-venvs/ocata/src/nova
+        version: stable/ocata
+  
+    - name: Checkout nova pike
+      git:
+        repo: 'https://github.com/openstack/nova.git'
+        dest: /root/upgrade-venvs/pike/src/nova
+        version: stable/pike
+  
+    - name: Checkout nova queens
+      git:
+        repo: 'https://github.com/openstack/nova.git'
+        dest: /root/upgrade-venvs/queens/src/nova
+        version: stable/queens
+  
+    - name: Checkout nova rocky
+      git:
+        repo: 'https://github.com/openstack/nova.git'
+        dest: /root/upgrade-venvs/rocky/src/nova
+        version: stable/rocky
+  
+    - name: Checkout neutron ocata
+      git:
+        repo: 'https://github.com/openstack/neutron.git'
+        dest: /root/upgrade-venvs/ocata/src/neutron
+        version: stable/ocata
+  
+    - name: Checkout neutron pike
+      git:
+        repo: 'https://github.com/openstack/neutron.git'
+        dest: /root/upgrade-venvs/pike/src/neutron
+        version: stable/pike
+  
+    - name: Checkout neutron queens
+      git:
+        repo: 'https://github.com/openstack/neutron.git'
+        dest: /root/upgrade-venvs/queens/src/neutron
+        version: stable/queens
+  
+    - name: Checkout neutron rocky
+      git:
+        repo: 'https://github.com/openstack/neutron.git'
+        dest: /root/upgrade-venvs/rocky/src/neutron
+        version: stable/rocky
+  
+        #- name: Checkout horizon ocata
+        #git:
+        #repo: 'https://github.com/openstack/horizon.git'
+        #dest: /root/upgrade-venvs/ocata/src/horizon
+        #version: stable/ocata
+  
+        #- name: Checkout horizon pike
+        #git:
+        #repo: 'https://github.com/openstack/horizon.git'
+        #dest: /root/upgrade-venvs/pike/src/horizon
+        #version: stable/pike
+  
+        #- name: Checkout horizon queens
+        #git:
+        #repo: 'https://github.com/openstack/horizon.git'
+        #dest: /root/upgrade-venvs/queens/src/horizon
+        #version: stable/queens
+  
+        #- name: Checkout horizon rocky
+        #git:
+        #repo: 'https://github.com/openstack/horizon.git'
+        #dest: /root/upgrade-venvs/rocky/src/horizon
+        #version: stable/rocky
+  
+    - name: setup keystone ocata
+      shell: "/root/upgrade-venvs/ocata/bin/python /root/upgrade-venvs/ocata/src/keystone/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/ocata/src/keystone/
+    
+    - name: setup keystone pike
+      shell: "/root/upgrade-venvs/pike/bin/python /root/upgrade-venvs/pike/src/keystone/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/pike/src/keystone/
+    
+    - name: setup keystone queens
+      shell: "/root/upgrade-venvs/queens/bin/python /root/upgrade-venvs/queens/src/keystone/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/queens/src/keystone/
+    
+    - name: setup keystone rocky
+      shell: "/root/upgrade-venvs/rocky/bin/python /root/upgrade-venvs/rocky/src/keystone/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/rocky/src/keystone/
+    
+    - name: setup glance ocata
+      shell: "/root/upgrade-venvs/ocata/bin/python /root/upgrade-venvs/ocata/src/glance/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/ocata/src/glance/
+    
+    - name: setup glance pike
+      shell: "/root/upgrade-venvs/pike/bin/python /root/upgrade-venvs/pike/src/glance/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/pike/src/glance/
+    
+    - name: setup glance queens
+      shell: "/root/upgrade-venvs/queens/bin/python /root/upgrade-venvs/queens/src/glance/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/queens/src/glance/
+    
+    - name: setup glance rocky
+      shell: "/root/upgrade-venvs/rocky/bin/python /root/upgrade-venvs/rocky/src/glance/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/rocky/src/glance/
+    
+    - name: setup cinder ocata
+      shell: "/root/upgrade-venvs/ocata/bin/python /root/upgrade-venvs/ocata/src/cinder/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/ocata/src/cinder/
+    
+    - name: setup cinder pike
+      shell: "/root/upgrade-venvs/pike/bin/python /root/upgrade-venvs/pike/src/cinder/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/pike/src/cinder/
+    
+    - name: setup cinder queens
+      shell: "/root/upgrade-venvs/queens/bin/python /root/upgrade-venvs/queens/src/cinder/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/queens/src/cinder/
+    
+    - name: setup cinder rocky
+      shell: "/root/upgrade-venvs/rocky/bin/python /root/upgrade-venvs/rocky/src/cinder/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/rocky/src/cinder/
+    
+    - name: setup nova ocata
+      shell: "/root/upgrade-venvs/ocata/bin/python /root/upgrade-venvs/ocata/src/nova/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/ocata/src/nova/
+    
+    - name: setup nova pike
+      shell: "/root/upgrade-venvs/pike/bin/python /root/upgrade-venvs/pike/src/nova/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/pike/src/nova/
+    
+    - name: setup nova queens
+      shell: "/root/upgrade-venvs/queens/bin/python /root/upgrade-venvs/queens/src/nova/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/queens/src/nova/
+    
+    - name: setup nova rocky
+      shell: "/root/upgrade-venvs/rocky/bin/python /root/upgrade-venvs/rocky/src/nova/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/rocky/src/nova/
+    
+    - name: setup neutron ocata
+      shell: "/root/upgrade-venvs/ocata/bin/python /root/upgrade-venvs/ocata/src/neutron/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/ocata/src/neutron/
+    
+    - name: setup neutron pike
+      shell: "/root/upgrade-venvs/pike/bin/python /root/upgrade-venvs/pike/src/neutron/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/pike/src/neutron/
+    
+    - name: setup neutron queens
+      shell: "/root/upgrade-venvs/queens/bin/python /root/upgrade-venvs/queens/src/neutron/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/queens/src/neutron/
+    
+    - name: setup neutron rocky
+      shell: "/root/upgrade-venvs/rocky/bin/python /root/upgrade-venvs/rocky/src/neutron/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/rocky/src/neutron/
+    
+        #- name: setup horizon ocata
+        #shell: "/root/upgrade-venvs/ocata/bin/python /root/upgrade-venvs/ocata/src/horizon/setup.py install"
+        #args:
+        #chdir: /root/upgrade-venvs/ocata/src/horizon/
+    
+        #- name: setup horizon pike
+        #shell: "/root/upgrade-venvs/pike/bin/python /root/upgrade-venvs/pike/src/horizon/setup.py install"
+        #args:
+        #chdir: /root/upgrade-venvs/pike/src/horizon/
+    
+        #- name: setup horizon queens
+        #shell: "/root/upgrade-venvs/queens/bin/python /root/upgrade-venvs/queens/src/horizon/setup.py install"
+        #args:
+        #chdir: /root/upgrade-venvs/queens/src/horizon/
+    
+        #- name: setup horizon rocky
+        #shell: "/root/upgrade-venvs/rocky/bin/python /root/upgrade-venvs/rocky/src/horizon/setup.py install"
+        #args:
+        #chdir: /root/upgrade-venvs/rocky/src/horizon/

@@ -1,0 +1,12 @@
+- name: Prep out localhost for upgrade
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Remove /etc/ansible
+      file:
+        state: absent
+        path: /etc/ansible
+    - name: Remove ansible_facts
+      file:
+        state: absent
+        path: /etc/openstack_deploy/ansible_facts

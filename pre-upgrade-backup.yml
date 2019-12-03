@@ -1,0 +1,38 @@
+---
+
+- name: stop lxc containers
+  hosts: "{{ container_group|default('all_containers') }},!galera_all,!rabbitmq_all"
+  gather_facts: false
+  user: root
+  tasks:
+    - name: stop a container
+      lxc_container:
+        name: "{{ container_name }}"
+        state: "stopped"
+      delegate_to: "{{ physical_host }}"
+
+#- name: shutdown services that access the database
+  #hosts: localhost
+  #tasks:
+    #- name: stopping cinder
+      #systemd:
+        #state: stopped
+        #name: cinder.slice
+
+- name: Prepare MQ/DB services
+  hosts: localhost
+  tasks:
+    - name: Dump database
+      shell: mysqldump --all-databases > /root/newton-database.save
+
+#    - name: Pull database out of container
+#      fetch:
+#        src: /root/newton-database.save
+#        dest: /root/newton-database.save
+#        flat: true
+
+#    - name: Pull database credentials out
+#      fetch:
+#        src: /root/.my.cnf
+#        dest: /root/.my.cnf.save
+#        flat: true

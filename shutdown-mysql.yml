@@ -1,0 +1,10 @@
+---
+- name: Prep galara for upgrade
+  hosts: galera_all
+  become: yes
+
+  tasks:
+    - name: Shutdown Galara servers
+      systemd:
+        state: stopped
+        name: mysql

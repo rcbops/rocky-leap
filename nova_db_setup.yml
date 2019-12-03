@@ -1,0 +1,78 @@
+- name: Create DB for service
+  mysql_db:
+    login_user: "{{ galera_root_user }}"
+    login_password: "{{ galera_root_password }}"
+    login_host: "{{ nova_galera_address }}"
+    name: "nova_cell0"
+    state: "present"
+  delegate_to: "{{ nova_db_setup_host }}"
+  no_log: True
+
+- name: Grant access to DBs for the services
+  mysql_user:
+    login_user: "{{ galera_root_user }}"
+    login_password: "{{ galera_root_password }}"
+    login_host: "{{ nova_galera_address }}"
+    name: "{{ item['name'] }}"
+    password: "{{ item['password'] }}"
+    host: "{{ item['host'] }}"
+    state: "present"
+    priv: "{{ item['database'] }}.*:ALL"
+    append_privs: "{{ item['db_append_privs'] | default(omit) }}"
+  delegate_to: "{{ nova_db_setup_host }}"
+  with_items:
+    - name: "{{ nova_api_galera_user }}"
+      password: "{{ nova_api_container_mysql_password }}"
+      host: "localhost"
+      database: "nova_cell0"
+      db_append_privs: "yes"
+    - name: "{{ nova_api_galera_user }}"
+      password: "{{ nova_api_container_mysql_password }}"
+      host: "%"
+      database: "nova_cell0"
+      db_append_privs: "yes"
+  no_log: True
+
+- name: Create the cell0 mapping entry in the nova API DB
+  command: >-
+    {{ nova_bin }}/nova-manage cell_v2 map_cell0
+      --database_connection mysql+pymysql://{{ nova_api_galera_user }}:{{ nova_api_container_mysql_password }}@{{ nova_api_galera_address }}/nova_cell0?charset=utf8
+  become: yes
+  become_user: "{{ nova_system_user_name }}"
+  changed_when: false
+
+- name: Create the cell1 mapping entry in the nova API DB
+  command: >-
+    {{ nova_bin }}/nova-manage cell_v2 create_cell
+      --name cell1
+      --database_connection mysql+pymysql://{{ nova_galera_user }}:{{ nova_container_mysql_password }}@{{ nova_galera_address }}/{{ nova_galera_database }}?charset=utf8
+      --transport-url {{ nova_oslomsg_rpc_transport }}://{% for host in nova_oslomsg_rpc_servers.split(',') %}{{ nova_oslomsg_rpc_userid }}:{{ nova_oslomsg_rpc_password }}@{{ host }}:{{ nova_oslomsg_rpc_port }}{% if not loop.last %},{% else %}/{{ nova_oslomsg_rpc_vhost }}{% endif %}{% endfor %}
+  become: yes
+  become_user: "{{ nova_system_user_name }}"
+  register: nova_cell1_create
+  # When upgrading, cell1 will already exist and nova-manage will
+  # give a return code of 2, so we therefore know that if the
+  # return code is:
+  # 0: the cell mapping record in the nova API database was
+  #    successfully implemented (greenfield install)
+  # 2: the cell mapping record in the nova API database already
+  #    exists (brownfield install)
+  failed_when: "nova_cell1_create.rc not in [0, 2]"
+  changed_when: "nova_cell1_create.rc == 0"
+
+# When upgrading we need to map existing instances to the new cell1
+# To do this we need the cell UUID.
+- name: Get UUID of new Nova Cell
+  shell: "{{ nova_bin }}/nova-manage cell_v2 list_cells | grep ' cell1 '"
+  become: yes
+  become_user: "{{ nova_system_user_name }}"
+  register: cell1_uuid
+  changed_when: false
+  when: "nova_cell1_create.rc == 0"
+
+- name: Map instances to new Cell1
+  command: "{{ nova_bin }}/nova-manage cell_v2 map_instances --cell_uuid {{ cell1_uuid['stdout'].split()[3] }}"
+  become: yes
+  become_user: "{{ nova_system_user_name }}"
+  changed_when: false
+  when: "nova_cell1_create.rc == 0"

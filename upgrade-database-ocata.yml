@@ -1,0 +1,92 @@
+---
+
+- name: Prepare Virt Environments
+  hosts: localhost
+  tasks:
+    - name: Perform ocata Keystone DB sync
+      shell: "/root/upgrade-venvs/ocata/bin/keystone-manage db_sync"
+
+    - name: Perform ocata glance DB sync
+      shell: "/root/upgrade-venvs/ocata/bin/glance-manage db sync"
+
+    - name: Perform ocata cinder DB sync
+      shell: "/root/upgrade-venvs/ocata/bin/cinder-manage db sync"
+
+    - name: Perform online data migrations ocata cinder
+      shell: "/root/upgrade-venvs/ocata/bin/cinder-manage db online_data_migrations"
+
+- name: create cell db
+  hosts: galera[0]
+  tasks:
+    - name: Create DB for service
+      mysql_db:
+        name: nova_cell0
+        state: present
+
+    - name: Grant access to DBs for the services
+      mysql_user:
+        name: "{{ item['name'] }}"
+        password: "{{ item['password'] }}"
+        host: "{{ item['host'] }}"
+        state: "present"
+        priv: "{{ item['database'] }}.*:ALL"
+        append_privs: "{{ item['db_append_privs'] | default(omit) }}"
+      with_items:
+        - name: "nova_api"
+          password: "{{ nova_api_container_mysql_password }}"
+          host: "localhost"
+          database: "nova_cell0"
+          db_append_privs: "yes"
+        - name: "nova_api"
+          password: "{{ nova_api_container_mysql_password }}"
+          host: "%"
+          database: "nova_cell0"
+          db_append_privs: "yes"
+
+- name: map cells
+  hosts: localhost
+  tasks:
+    - name: Create the cell0 mapping entry in the nova API DB
+      command: >-
+        /root/upgrade-venvs/ocata/bin/nova-manage cell_v2 map_cell0
+          --database_connection mysql+pymysql://nova_api:{{ nova_api_container_mysql_password }}@{{ galera_address }}/nova_cell0?charset=utf8
+      changed_when: false
+
+    - name: Create the cell1 mapping entry in the nova API DB
+      command: >-
+        /root/upgrade-venvs/ocata/bin/nova-manage cell_v2 create_cell
+          --name cell1
+          --database_connection mysql+pymysql://nova:{{ nova_container_mysql_password }}@{{ galera_address }}/nova?charset=utf8
+          --transport-url amqp://{% for host in nova_rabbitmq_servers.split(',') %}{{ nova_rabbitmq_userid }}:{{ nova_rabbitmq_password }}@{{ host }}:{{ nova_rabbitmq_port }}{% if not loop.last %},{% else %}/{{ nova_rabbitmq_vhost }}{% endif %}{% endfor %}
+      register: nova_cell1_create
+      failed_when: "nova_cell1_create.rc not in [0, 2]"
+      changed_when: "nova_cell1_create.rc == 0"
+
+    - name: Get UUID of new Nova Cell
+      shell: "/root/upgrade-venvs/ocata/bin/nova-manage cell_v2 list_cells | grep ' cell1 '"
+      register: cell1_uuid
+      changed_when: false
+      when: "nova_cell1_create.rc == 0"
+    
+    - name: Map instances to new Cell1
+      command: "/root/upgrade-venvs/ocata/bin/nova-manage cell_v2 map_instances --cell_uuid {{ cell1_uuid['stdout'].split()[3] }}"
+      changed_when: false
+      when: "nova_cell1_create.rc == 0"
+
+    - name: Perform ocata Nova API DB sync
+      shell: "/root/upgrade-venvs/ocata/bin/nova-manage api_db sync"
+
+    - name: Perform ocata Nova DB sync
+      shell: "/root/upgrade-venvs/ocata/bin/nova-manage db sync"
+
+    - name: Perform ocata online data migrations
+      shell: "/root/upgrade-venvs/ocata/bin/nova-manage db online_data_migrations"
+
+    - name: Perform ocata neutron DB upgrade
+      shell: "/root/upgrade-venvs/ocata/bin/neutron-db-manage upgrade --expand"
+
+    - name: Perform ocata neutron DB offline migrations
+      shell: "/root/upgrade-venvs/ocata/bin/neutron-db-manage has_offline_migrations"
+
+      #    - name: Perform ocata Horizon DB migrate
+      #shell: "/root/upgrade-venvs/ocata/bin/horizon-manage.py migrate --noinput"
