@@ -157,7 +157,7 @@
 
     - name: Install neutron requirements rocky
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/neutron/stable/rocky/requirements.txt
+        requirements: /root/upgrades/neutron-rocky-requirements.txt
         virtualenv: /root/upgrade-venvs/rocky
         virtualenv_python: python2.7
   

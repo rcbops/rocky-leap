@@ -50,15 +50,15 @@ function run_lock {
 
 function upgrade_database {
   pushd /root/upgrades
-    RUN_TASKS=("/root/upgrades/prep-upgrade.yml --ask-vault-pass")
-    RUN_TASKS+=("/root/upgrades/build-configs.yml --ask-vault-pass")
-    RUN_TASKS+=("/root/upgrades/build-venvs.yml --ask-vault-pass")
-    RUN_TASKS+=("/root/upgrades/pre-upgrade-backup.yml --ask-vault-pass")
-    RUN_TASKS+=("/root/upgrades/upgrade-database-ocata.yml --ask-vault-pass")
-    RUN_TASKS+=("/root/upgrades/upgrade-database-pike.yml --ask-vault-pass")
-    RUN_TASKS+=("/root/upgrades/upgrade-database-queens.yml --ask-vault-pass")
-    RUN_TASKS+=("/root/upgrades/upgrade-database-rocky.yml --ask-vault-pass")
-    RUN_TASKS+=("/root/upgrades/post-upgrade-backup.yml --ask-vault-pass")
+    RUN_TASKS=("/root/upgrades/prep-upgrade.yml")
+    RUN_TASKS+=("/root/upgrades/build-configs.yml")
+    RUN_TASKS+=("/root/upgrades/build-venvs.yml")
+    RUN_TASKS+=("/root/upgrades/pre-upgrade-backup.yml")
+    RUN_TASKS+=("/root/upgrades/upgrade-database-ocata.yml")
+    RUN_TASKS+=("/root/upgrades/upgrade-database-pike.yml")
+    RUN_TASKS+=("/root/upgrades/upgrade-database-queens.yml")
+    RUN_TASKS+=("/root/upgrades/upgrade-database-rocky.yml")
+    RUN_TASKS+=("/root/upgrades/post-upgrade-backup.yml")
     for item in ${!RUN_TASKS[@]}; do
       run_lock $item "${RUN_TASKS[$item]}"
     done
@@ -66,18 +66,25 @@ function upgrade_database {
 }
 
 function pre_flight {
+  upgrade_marker_file="bootstrap"
+  upgrade_marker="/etc/openstack_deploy/upgrade-${TARGET_SERIES}/$upgrade_marker_file.complete"
+
+  if [ ! -f "$upgrade_marker" ];then
+    if [ ! -d  "/opt/openstack-ansible" ]; then
+        pushd /opt
+           git clone https://github.com/openstack/openstack-ansible
+        popd
+    fi
     pushd /opt/openstack-ansible
         git stash
         git checkout master
         git fetch && git fetch --tags
         git checkout stable/rocky
-#        git checkout 18.1.6
-        echo "Wait for containers to be available"
-        sleep 2m
         /opt/openstack-ansible/scripts/bootstrap-ansible.sh
     popd
+    touch "$upgrade_marker"
+  fi
 }
-
 
 function main {
     openstack-ansible /root/upgrades/prep-jump.yml
