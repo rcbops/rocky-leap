@@ -13,7 +13,7 @@
         state: absent
         path: /etc/apt/sources.list.d
     - file:
-        state: absent
+        state: directory
         path: /etc/apt/sources.list.d
     - name: Reset sources.list to default
       copy:
