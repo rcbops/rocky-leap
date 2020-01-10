@@ -1,0 +1,10 @@
+---
+- name: Install virtualenv into all containers
+  hosts: infra_all
+  become: yes
+
+  tasks:
+    - name: apt install virtualenv
+      apt:
+        name: virtualenv
+        state: present

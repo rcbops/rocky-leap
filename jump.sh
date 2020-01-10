@@ -94,6 +94,7 @@ function main {
     pushd /opt/openstack-ansible
         RUN_TASKS=("/opt/openstack-ansible/playbooks/lxc-containers-destroy.yml -e force_containers_destroy=true -e force_containers_data_destroy=true")
         RUN_TASKS+=("/opt/openstack-ansible/playbooks/setup-hosts.yml -f 50")
+        RUN_TASKS+=("/root/upgrades/venv_install.yml")
         RUN_TASKS=("/opt/openstack-ansible/playbooks/setup-infrastructure.yml -f 50")
         RUN_TASKS+=("/root/upgrades/install_db.yml")
         RUN_TASKS+=("/opt/openstack-ansible/playbooks/setup-openstack.yml -f 50 -l '!compute_all'")
