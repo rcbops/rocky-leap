@@ -1,6 +1,9 @@
 - name: CLean up keystone admin endpoint
   hosts: utility_all[0]
   tasks:
+    - name: Create nova placement project
+      shell: ". /root/openrc;openstack project create placement"
+
     - name: Delete keystone admin endpoint
       shell: ". /root/openrc;openstack endpoint delete $(. /root/openrc;openstack endpoint list | grep identity | grep admin | awk '{print $2}')"
 
