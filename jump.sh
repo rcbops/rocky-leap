@@ -70,6 +70,9 @@ function pre_flight {
   upgrade_marker="/etc/openstack_deploy/upgrade-${TARGET_SERIES}/$upgrade_marker_file.complete"
 
   if [ ! -f "$upgrade_marker" ];then
+
+    openstack-ansible /root/upgrades/prep-jump.yml
+
     if [ ! -d  "/opt/openstack-ansible" ]; then
         pushd /opt
            git clone https://github.com/openstack/openstack-ansible
@@ -87,7 +90,6 @@ function pre_flight {
 }
 
 function main {
-    openstack-ansible /root/upgrades/prep-jump.yml
     pre_flight
     pushd /opt/openstack-ansible
         RUN_TASKS=("/opt/openstack-ansible/playbooks/lxc-containers-destroy.yml -e force_containers_destroy=true -e force_containers_data_destroy=true")

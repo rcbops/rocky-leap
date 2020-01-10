@@ -1,11 +1,27 @@
+- name: CLean up keystone admin endpoint
+  hosts: utility_all[0]
+  tasks:
+    - name: Delete keystone admin endpoint
+      shell: ". /root/openrc;openstack endpoint delete $(. /root/openrc;openstack endpoint list | grep identity | grep admin | awk '{print $2}')"
+
 - name: Prep out controllers for upgrade
-  hosts: lxc_hosts #,galera
+  hosts: lxc_hosts
   gather_facts: false
   tasks:
-    - name: Remove MariaDB Repo
+    - name: Remove Extra Repos
       file:
         state: absent
-        path: /etc/apt/sources.list.d/MariaDB.list
+        path: /etc/apt/sources.list.d
+    - file:
+        state: absent
+        path: /etc/apt/sources.list.d
+    - name: Reset sources.list to default
+      copy:
+        src: /root/upgrades/sources.list
+        dest: /etc/apt/sources.list
+        owner: root
+        group: root
+        mode: '0644'
     - name: Remove pip config from etc
       file:
         state: absent
