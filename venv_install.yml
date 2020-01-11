@@ -1,6 +1,6 @@
 ---
 - name: Install virtualenv into all containers
-  hosts: infra_all
+  hosts: all_containers
   become: yes
 
   tasks:
