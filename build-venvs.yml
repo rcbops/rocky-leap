@@ -1,10 +1,32 @@
 ---
 - name: Prepare Virt Environments
   hosts: localhost
-#  environment:
-#    HTTP_PROXY: 'http://cloud-proxy.gslb2.comcast.com:8888'
-#    HTTPS_PROXY: 'http://cloud-proxy.gslb2.comcast.com:8888'
   tasks:
+
+    - name: Install setuptools<45 for ocata venv
+      pip: 
+        name: setuptools<45
+        virtualenv: /root/upgrade-venvs/ocata
+        virtualenv_python: python2.7
+
+    - name: Install setuptools<45 for pike venv
+      pip: 
+        name: setuptools<45
+        virtualenv: /root/upgrade-venvs/pike
+        virtualenv_python: python2.7
+
+    - name: Install setuptools<45 for queens venv
+      pip: 
+        name: setuptools<45
+        virtualenv: /root/upgrade-venvs/queens
+        virtualenv_python: python2.7
+
+    - name: Install setuptools<45 for rocky venv
+      pip: 
+        name: setuptools<45
+        virtualenv: /root/upgrade-venvs/rocky
+        virtualenv_python: python2.7
+
     - name: Install keystone requirements ocata
       pip: 
         requirements: https://raw.githubusercontent.com/openstack/keystone/stable/ocata/requirements.txt

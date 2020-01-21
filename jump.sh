@@ -82,8 +82,9 @@ function pre_flight {
         git stash
         git checkout master
         git fetch && git fetch --tags
-        git checkout stable/rocky
-        git pull
+        #git checkout stable/rocky
+        git checkout 18.1.16
+#        git pull
         echo "Waiting for containers to start up"
         sleep 2m
         /opt/openstack-ansible/scripts/bootstrap-ansible.sh
