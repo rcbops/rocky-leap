@@ -2,9 +2,11 @@
 
 - name: import database
   hosts: localhost
+  vars_files:
+    - "/root/upgrades/defaults.yml"
   tasks:
     - name: Bring in database
-      shell: mysql < /root/rocky-database.save
+      shell: "mysql < {{ dbdump_dir }}/rocky-database.save"
 
 - name: Prepare Permissions
   hosts: galera_all[0]

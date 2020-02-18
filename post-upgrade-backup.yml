@@ -2,15 +2,11 @@
 
 - name: Prepare MQ/DB services
   hosts: localhost
+  vars_files:
+    - "/root/upgrades/defaults.yml"
   tasks:
     - name: Dump database
-      shell: mysqldump --all-databases > /root/rocky-database.save
-
-#    - name: Pull database out of container
-#      fetch:
-#        src: /root/rocky-database.save
-#        dest: /root/rocky-database.save
-#        flat: true
+      shell: "mysqldump --all-databases > {{ dbdump_dir }}/rocky-database.save"
 
 - name: start all containers
   hosts: all_containers
