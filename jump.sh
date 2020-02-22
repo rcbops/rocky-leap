@@ -20,7 +20,7 @@ function run_lock {
   upgrade_marker="/etc/openstack_deploy/upgrade-${TARGET_SERIES}/$upgrade_marker_file.complete"
 
   if [ ! -f "$upgrade_marker" ];then
-    eval "openstack-ansible $2"
+    eval "openstack-ansible -@defaults.yml $2"
     playbook_status="$?"
     echo "ran $run_item"
 
@@ -71,7 +71,7 @@ function pre_flight {
 
   if [ ! -f "$upgrade_marker" ];then
 
-    openstack-ansible /root/upgrades/prep-jump.yml
+    openstack-ansible -e@defaults.yml /root/upgrades/prep-jump.yml
 
     if [ ! -d  "/opt/openstack-ansible" ]; then
         pushd /opt
