@@ -27,8 +27,5 @@
     - name: Perform rocky designate DB upgrade
       shell: "/root/upgrade-venvs/rocky/bin/designate-manage database sync"
 
-    - name: Perform rocky designate pool update
-      shell: "/root/upgrade-venvs/rocky/bin/designate-manage pool update"
-
     - name: Perform rocky heat DB upgrade
       shell: "/root/upgrade-venvs/rocky/bin/heat-manage db_sync"

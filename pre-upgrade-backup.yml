@@ -11,10 +11,10 @@
         state: "stopped"
       delegate_to: "{{ physical_host }}"
 
-- name: Prepare MQ/DB services
-  hosts: localhost
-  vars_files:
-    - "/root/upgrades/defaults.yml"
-  tasks:
-    - name: Dump database
-      shell: "mysqldump --all-databases > {{ dbdump_dir }}/newton-database.save"
+#- name: Prepare MQ/DB services
+#  hosts: localhost
+#  vars_files:
+#    - "/root/upgrades/defaults.yml"
+#  tasks:
+#    - name: Dump database
+#      shell: "mysqldump --all-databases > {{ dbdump_dir }}/newton-database.save"

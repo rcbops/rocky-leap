@@ -91,8 +91,5 @@
     - name: Perform ocata designate DB upgrade
       shell: "/root/upgrade-venvs/ocata/bin/designate-manage database sync"
 
-    - name: Perform ocata designate pool update
-      shell: "/root/upgrade-venvs/ocata/bin/designate-manage pool update"
-
     - name: Perform ocata heat DB upgrade
       shell: "/root/upgrade-venvs/ocata/bin/heat-manage db_sync"

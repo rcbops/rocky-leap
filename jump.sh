@@ -110,4 +110,4 @@ function main {
 
 TARGET_SERIES="rocky"
 upgrade_database
-main
+#main

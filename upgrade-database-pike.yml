@@ -33,8 +33,5 @@
     - name: Perform pike designate DB upgrade
       shell: "/root/upgrade-venvs/pike/bin/designate-manage database sync"
 
-    - name: Perform pike designate pool update
-      shell: "/root/upgrade-venvs/pike/bin/designate-manage pool update"
-
     - name: Perform pike heat DB upgrade
       shell: "/root/upgrade-venvs/pike/bin/heat-manage db_sync"
