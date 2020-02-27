@@ -12,17 +12,11 @@
     - name: Perform rocky cinder DB sync
       shell: "/root/upgrade-venvs/rocky/bin/cinder-manage db sync"
 
-      #    - name: Perform online data migrations rocky cinder
-      #shell: "/root/upgrade-venvs/rocky/bin/cinder-manage db online_data_migrations"
-
     - name: Perform rocky Nova API DB sync
       shell: "/root/upgrade-venvs/rocky/bin/nova-manage api_db sync"
 
     - name: Perform rocky Nova DB sync
       shell: "/root/upgrade-venvs/rocky/bin/nova-manage db sync"
-
-#    - name: Perform rocky online data migrations
-#      shell: "/root/upgrade-venvs/rocky/bin/nova-manage db online_data_migrations"
 
     - name: Perform rocky neutron DB upgrade
       shell: "/root/upgrade-venvs/rocky/bin/neutron-db-manage upgrade --expand"
@@ -30,5 +24,11 @@
     - name: Perform rocky neutron DB offline migrations
       shell: "/root/upgrade-venvs/rocky/bin/neutron-db-manage has_offline_migrations"
 
-      #    - name: Perform rocky Horizon DB migrate
-      #shell: "/root/upgrade-venvs/rocky/bin/horizon-manage.py migrate --noinput"
+    - name: Perform rocky designate DB upgrade
+      shell: "/root/upgrade-venvs/rocky/bin/designate-manage database sync"
+
+    - name: Perform rocky designate pool update
+      shell: "/root/upgrade-venvs/rocky/bin/designate-manage pool update"
+
+    - name: Perform rocky heat DB upgrade
+      shell: "/root/upgrade-venvs/rocky/bin/heat-manage db_sync"

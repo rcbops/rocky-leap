@@ -207,6 +207,30 @@
         virtualenv: /root/upgrade-venvs/rocky
         virtualenv_python: python2.7
   
+    - name: Install heat requirements ocata
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/heat/stable/ocata/requirements.txt
+        virtualenv: /root/upgrade-venvs/ocata
+        virtualenv_python: python2.7
+
+    - name: Install heat requirements pike
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/heat/stable/pike/requirements.txt
+        virtualenv: /root/upgrade-venvs/pike
+        virtualenv_python: python2.7
+  
+    - name: Install heat requirements queens
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/heat/stable/queens/requirements.txt
+        virtualenv: /root/upgrade-venvs/queens
+        virtualenv_python: python2.7
+  
+    - name: Install heat requirements rocky
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/heat/stable/rocky/requirements.txt
+        virtualenv: /root/upgrade-venvs/rocky
+        virtualenv_python: python2.7
+  
     - name: Checkout keystone ocata
       git:
         repo: 'https://github.com/openstack/keystone.git'
@@ -327,29 +351,53 @@
         dest: /root/upgrade-venvs/rocky/src/neutron
         version: stable/rocky
   
-        #- name: Checkout horizon ocata
-        #git:
-        #repo: 'https://github.com/openstack/horizon.git'
-        #dest: /root/upgrade-venvs/ocata/src/horizon
-        #version: stable/ocata
+    - name: Checkout designate ocata
+      git:
+        repo: 'https://github.com/openstack/designate.git'
+        dest: /root/upgrade-venvs/ocata/src/designate
+        version: stable/ocata
   
-        #- name: Checkout horizon pike
-        #git:
-        #repo: 'https://github.com/openstack/horizon.git'
-        #dest: /root/upgrade-venvs/pike/src/horizon
-        #version: stable/pike
+    - name: Checkout designate pike
+      git:
+        repo: 'https://github.com/openstack/designate.git'
+        dest: /root/upgrade-venvs/pike/src/designate
+        version: stable/pike
   
-        #- name: Checkout horizon queens
-        #git:
-        #repo: 'https://github.com/openstack/horizon.git'
-        #dest: /root/upgrade-venvs/queens/src/horizon
-        #version: stable/queens
+    - name: Checkout designate queens
+      git:
+        repo: 'https://github.com/openstack/designate.git'
+        dest: /root/upgrade-venvs/queens/src/designate
+        version: stable/queens
   
-        #- name: Checkout horizon rocky
-        #git:
-        #repo: 'https://github.com/openstack/horizon.git'
-        #dest: /root/upgrade-venvs/rocky/src/horizon
-        #version: stable/rocky
+    - name: Checkout designate rocky
+      git:
+        repo: 'https://github.com/openstack/designate.git'
+        dest: /root/upgrade-venvs/rocky/src/designate
+        version: stable/rocky
+  
+    - name: Checkout heat ocata
+      git:
+        repo: 'https://github.com/openstack/heat.git'
+        dest: /root/upgrade-venvs/ocata/src/heat
+        version: stable/ocata
+  
+    - name: Checkout heat pike
+      git:
+        repo: 'https://github.com/openstack/heat.git'
+        dest: /root/upgrade-venvs/pike/src/heat
+        version: stable/pike
+  
+    - name: Checkout heat queens
+      git:
+        repo: 'https://github.com/openstack/heat.git'
+        dest: /root/upgrade-venvs/queens/src/heat
+        version: stable/queens
+  
+    - name: Checkout heat rocky
+      git:
+        repo: 'https://github.com/openstack/heat.git'
+        dest: /root/upgrade-venvs/rocky/src/heat
+        version: stable/rocky
   
     - name: setup keystone ocata
       shell: "/root/upgrade-venvs/ocata/bin/python /root/upgrade-venvs/ocata/src/keystone/setup.py install"
@@ -451,22 +499,42 @@
       args:
         chdir: /root/upgrade-venvs/rocky/src/neutron/
     
-        #- name: setup horizon ocata
-        #shell: "/root/upgrade-venvs/ocata/bin/python /root/upgrade-venvs/ocata/src/horizon/setup.py install"
-        #args:
-        #chdir: /root/upgrade-venvs/ocata/src/horizon/
+    - name: setup designate ocata
+      shell: "/root/upgrade-venvs/ocata/bin/python /root/upgrade-venvs/ocata/src/designate/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/ocata/src/designate/
     
-        #- name: setup horizon pike
-        #shell: "/root/upgrade-venvs/pike/bin/python /root/upgrade-venvs/pike/src/horizon/setup.py install"
-        #args:
-        #chdir: /root/upgrade-venvs/pike/src/horizon/
+    - name: setup designate pike
+      shell: "/root/upgrade-venvs/pike/bin/python /root/upgrade-venvs/pike/src/designate/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/pike/src/designate/
     
-        #- name: setup horizon queens
-        #shell: "/root/upgrade-venvs/queens/bin/python /root/upgrade-venvs/queens/src/horizon/setup.py install"
-        #args:
-        #chdir: /root/upgrade-venvs/queens/src/horizon/
+    - name: setup designate queens
+      shell: "/root/upgrade-venvs/queens/bin/python /root/upgrade-venvs/queens/src/designate/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/queens/src/designate/
     
-        #- name: setup horizon rocky
-        #shell: "/root/upgrade-venvs/rocky/bin/python /root/upgrade-venvs/rocky/src/horizon/setup.py install"
-        #args:
-        #chdir: /root/upgrade-venvs/rocky/src/horizon/
+    - name: setup neutron rocky
+      shell: "/root/upgrade-venvs/rocky/bin/python /root/upgrade-venvs/rocky/src/designate/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/rocky/src/designate/
+    
+    - name: setup heat ocata
+      shell: "/root/upgrade-venvs/ocata/bin/python /root/upgrade-venvs/ocata/src/heat/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/ocata/src/heat/
+    
+    - name: setup heat pike
+      shell: "/root/upgrade-venvs/pike/bin/python /root/upgrade-venvs/pike/src/heat/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/pike/src/heat/
+    
+    - name: setup heat queens
+      shell: "/root/upgrade-venvs/queens/bin/python /root/upgrade-venvs/queens/src/heat/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/queens/src/heat/
+    
+    - name: setup heat rocky
+      shell: "/root/upgrade-venvs/rocky/bin/python /root/upgrade-venvs/rocky/src/heat/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/rocky/src/heat/

@@ -30,5 +30,11 @@
     - name: Perform queens neutron DB offline migrations
       shell: "/root/upgrade-venvs/queens/bin/neutron-db-manage has_offline_migrations"
 
-      #    - name: Perform queens Horizon DB migrate
-      #shell: "/root/upgrade-venvs/queens/bin/horizon-manage.py migrate --noinput"
+    - name: Perform queens designate DB upgrade
+      shell: "/root/upgrade-venvs/queens/bin/designate-manage database sync"
+
+    - name: Perform queens designate pool update
+      shell: "/root/upgrade-venvs/queens/bin/designate-manage pool update"
+
+    - name: Perform queens heat DB upgrade
+      shell: "/root/upgrade-venvs/queens/bin/heat-manage db_sync"
