@@ -1,4 +1,4 @@
-# Upgrades Newton to Rocky JCB style
+Upgrades Newton to Rocky JCB style
 
 ////////////////////////////////////////////////////////////////////////////////
 // PRE SCHEDULING REQUIREMENTS
@@ -29,7 +29,7 @@
    A host OS upgrade to Xenial will need to be scheduled.
 
 ////////////////////////////////////////////////////////////////////////////////
-// Maintenance Template for upgrading to RPC 16 Pike release
+// Maintenance Template for upgrading RPC Newton to openstack-Ansible Rocky release
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -37,7 +37,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
  (1) Maintenance objective:
-    - Update Newton (RPC14) to Rocky (RPC18) version
+    - Update Newton (RPC14) to Rocky (OSA 18) version
 
  (1a) What should we check to confirm the solution is functioning as expected?
     - Environment is running a RPC18, Rocky version
@@ -57,7 +57,7 @@
     Less than 30 compute nodes: Up to 8 hours
 
 --------------------------------------------------------------------------------
- (5) Maintenance Steps:
+ (5) Maintenance Steps:
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
@@ -76,6 +76,8 @@ _EOF
    # To enable screen logging press: Ctrl + b followed by H
 
    export PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w $(date +'%s') \$ '
+   export BKUPDIR=/root/upgrade-backups; mkdir $BKUPDIR
+   export ANSIBLE_FORKS=50
 
 - <RPCO> 5.1.1 Create upgrade directory and set environment
 
@@ -103,8 +105,6 @@ Remove any sources that point to openstack sources like:
    deb http://ubuntu-cloud.archive.canonical.com/ubuntu xenial-updates/newton main
 
 run apt-get update verify there are no errors
-   export BKUPDIR=/root/upgrade-backups; mkdir $BKUPDIR
-   export ANSIBLE_FORKS=50
 
 - <RPCO> 5.1.2 Setup monitoring suppression
 
@@ -265,7 +265,7 @@ run apt-get update verify there are no errors
    ansible -m synchronize galera_container[0] -a 'mode=push src=/opt/openstack-ops/playbooks/files/rpc-o-support/nova-instance-cleanup.sh dest=/root/' && \
     ansible -m shell galera_container[0] -a 'bash -x /root/nova-instance-cleanup.sh' )
  
-5.1.7
+- <RPCO> 5.2.4
   Remove all rpco references in /etc/openstack_deploy/user_osa_variables_overrides.yml or convert to OSA equivalents
   
   add lvm_type to all cinder nodes in openstack_user_config.yml . Default (for thick-provisioning) or auto (for thin-provisioning) () 
@@ -279,38 +279,24 @@ run apt-get update verify there are no errors
            volume_driver: cinder.volume.drivers.lvm.LVMVolumeDriver
            volume_group: cinder-volumes
            lvm_type: default     #This has to be set in order to get thick provisioning
-  
-5.1.8 . Environment cleanup
-*  
-* Verify no instances outside of ACTIVE, RUNNING, STOPPED.  Clean up any error states or transient instance states
-* # nova list --all-t | egrep -iv 'ACTIVE|RUNNING|STOPPED'
-*  
-* Verify all volumes in AVAILABLE or IN-USE state.  Clean up any volumes outside of these states
-* # cinder list | egrep -iv 'AVAILABLE|IN-USE'
+ 
+- <RPCO> 5.2.5  Environment cleanup
+ 
+ Verify no instances outside of ACTIVE, RUNNING, STOPPED.  Clean up any error states or transient instance states
+ # nova list --all-t | egrep -iv 'ACTIVE|RUNNING|STOPPED'
+ 
+ Verify all volumes in AVAILABLE or IN-USE state.  Clean up any volumes outside of these states
+ # cinder list | egrep -iv 'AVAILABLE|IN-USE'
 
 --------------------------------------------------------------------------------
  (5.3) Starting the upgrade to Rocky
 --------------------------------------------------------------------------------
 
 - <Network Engineer> 5.3.1 F5 LB only: Change F5 monitors to half-open TCP checks during upgrade
-   HAPROXY, no need for F5 changes
 
-- <RPCO> 5.3.2 Upgrade to Queens
+- <RPCO> 5.3.2 Upgrade to Rocky
    cd /root/upgrades
    ./jump.sh
-
-- <RPCO> 5.3.3 Fixes
-   Rabbit SSL is likely broken at this point.  
-
-   Changes to templates
-     From:
-       update nova_api.cell_mappings set transport_url='amqp://nova:eaac08c351bad07cee78e23f0a@10.82.56.165:5671,nova:eaac08c351bad07cee78e23f0a@10.82.56.222:5671,nova:eaac08c351bad07cee78e23f0a@10.82.56.166:5671//nova' where name = 'cell1'
-     to:
-       update nova_api.cell_mappings set transport_url='rabbit://nova:eaac08c351bad07cee78e23f0a@10.82.56.165:5672,nova:eaac08c351bad07cee78e23f0a@10.82.56.222:5672,nova:eaac08c351bad07cee78e23f0a@10.82.56.166:5672//nova?ssl=0' where name = 'cell1'
-     then:
-       # nova-manage cell_v2 discover_hosts
-   Re-run os-neutron-install.yml and os-nova-install.yml
-
     
 --------------------------------------------------------------------------------
  (5.4) POST Deployment QC
