@@ -71,7 +71,7 @@ Upgrades Newton to Rocky JCB style
 bind-key H pipe-pane -o "exec cat >>$HOME/'#W-tmux.log'" \; display-message 'Toggled logging to $HOME/#W-tmux.log'
 _EOF
 
-   tmux new -s newton-queens-jump
+   tmux new -s newton-rocky-jump
 
    # To enable screen logging press: Ctrl + b followed by H
 
