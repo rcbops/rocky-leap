@@ -82,9 +82,8 @@ function pre_flight {
         git stash
         git checkout master
         git fetch && git fetch --tags
-        #git checkout stable/rocky
-        git checkout 18.1.16
-#        git pull
+        git checkout stable/rocky
+        git pull
         echo "Waiting for containers to start up"
         sleep 2m
         /opt/openstack-ansible/scripts/bootstrap-ansible.sh
@@ -97,10 +96,30 @@ function main {
     pre_flight
     pushd /opt/openstack-ansible
         RUN_TASKS=("/opt/openstack-ansible/playbooks/lxc-containers-destroy.yml -e force_containers_destroy=true -e force_containers_data_destroy=true")
+        # DELETE LINES UNTIL MARKER TO CONTINUE
+        echo "*****************************"
+        echo " Manual intervention required at this point (automation not built yet)"
+        echo ""
+        echo "Please remove all of the following containers from ansible-inventory"
+        echo ""
+        echo "- nova_api_metadata_container-*"
+        echo "- nova_api_os_compute_container-*"
+        echo "- nova_cert_container-*"
+        echo "- nova_conductor_container-*"
+        echo "- nova_console_container-*"
+        echo "- nova_scheduler_container-*"
+        echo ""
+        cp /opt/openstack-ansible/inventory/env.d/nova.yml /etc/openstack_deploy/env.d
+        echo "/etc/openstack_deploy/env.d/nova.ymnl has been updated for new skel.  Update any other files needed at this time.
+        echo "Delete lines 99-116 and then re-run jump.sh to continue installation"
+        exit 0
+        # MARKER! STOP DELETING LINES
+
         RUN_TASKS+=("/opt/openstack-ansible/playbooks/setup-hosts.yml -f 50")
         RUN_TASKS+=("/root/upgrades/venv_install.yml")
         RUN_TASKS+=("/opt/openstack-ansible/playbooks/setup-infrastructure.yml -f 50")
         RUN_TASKS+=("/root/upgrades/install_db.yml")
+        
         RUN_TASKS+=("/opt/openstack-ansible/playbooks/setup-openstack.yml -f 50 -l '!compute_all'")
         for item in ${!RUN_TASKS[@]}; do
           run_lock $item "${RUN_TASKS[$item]}"
@@ -110,4 +129,4 @@ function main {
 
 TARGET_SERIES="rocky"
 upgrade_database
-#main
+main
