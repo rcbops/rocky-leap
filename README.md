@@ -1,12 +1,5 @@
 # Upgrades Newton to Rocky JCB style
 
-ultimate ur lab
-
-https://one.rackspace.com/display/PrivateCloud/Ultimate+Software+-+818329+-+Runbook?searchId=N4B8DXI9U#UltimateSoftware-818329-Runbook-LabEnvironment(CDC)ForNewtonUpgradeTesting
-
-rabbitmq is bare_metal on dmia2ub1ctr0004 dmia2ub1ctr0005 dmia2ub1ctr0006
-  
-
 ////////////////////////////////////////////////////////////////////////////////
 // PRE SCHEDULING REQUIREMENTS
 ////////////////////////////////////////////////////////////////////////////////
