@@ -98,7 +98,7 @@ function main {
         RUN_TASKS=("/opt/openstack-ansible/playbooks/lxc-containers-destroy.yml -e force_containers_destroy=true -e force_containers_data_destroy=true")
         # DELETE LINES UNTIL MARKER TO CONTINUE
         echo "*****************************"
-        echo " Manual intervention required at this point (automation not built yet)"
+        echo " *** Manual intervention required at this point (automation not built yet) 888"
         echo ""
         echo "Please remove all of the following containers from ansible-inventory"
         echo ""
@@ -110,11 +110,10 @@ function main {
         echo "- nova_scheduler_container-*"
         echo ""
         cp /opt/openstack-ansible/inventory/env.d/nova.yml /etc/openstack_deploy/env.d
-        echo "/etc/openstack_deploy/env.d/nova.ymnl has been updated for new skel.  Update any other files needed at this time.
+        echo "/etc/openstack_deploy/env.d/nova.ymnl has been updated for new skel.  Update any other files needed at this time."
         echo "Delete lines 99-116 and then re-run jump.sh to continue installation"
         exit 0
         # MARKER! STOP DELETING LINES
-
         RUN_TASKS+=("/opt/openstack-ansible/playbooks/setup-hosts.yml -f 50")
         RUN_TASKS+=("/root/upgrades/venv_install.yml")
         RUN_TASKS+=("/opt/openstack-ansible/playbooks/setup-infrastructure.yml -f 50")
