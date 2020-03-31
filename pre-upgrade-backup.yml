@@ -1,20 +1,9 @@
 ---
 
-- name: stop lxc containers
-  hosts: "{{ container_group|default('all_containers') }},!galera_all,!rabbitmq_all"
-  gather_facts: false
-  user: root
+- name: Prepare MQ/DB services
+  hosts: localhost
+  vars_files:
+    - "/root/upgrades/defaults.yml"
   tasks:
-    - name: stop a container
-      lxc_container:
-        name: "{{ container_name }}"
-        state: "stopped"
-      delegate_to: "{{ physical_host }}"
-
-#- name: Prepare MQ/DB services
-#  hosts: localhost
-#  vars_files:
-#    - "/root/upgrades/defaults.yml"
-#  tasks:
-#    - name: Dump database
-#      shell: "mysqldump --all-databases > {{ dbdump_dir }}/newton-database.save"
+    - name: Dump database
+      shell: "mysqldump --all-databases > {{ dbdump_dir }}/newton-database.save"

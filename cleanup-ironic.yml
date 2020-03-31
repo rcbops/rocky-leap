@@ -1,0 +1,11 @@
+---
+
+- hosts: localhost
+  connection: local
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: Remove the inventory entries for the deleted containers
+      command: >-
+        {{ playbook_dir }}/../../inventory-manage.py -r {{ item }}
+      with_items: "{{ groups['ironic_conductor_container'] }}"

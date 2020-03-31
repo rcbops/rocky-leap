@@ -1,0 +1,12 @@
+---
+
+- name: stop lxc containers
+  hosts: "{{ container_group|default('all_containers') }},!galera_all,!rabbitmq_all"
+  gather_facts: false
+  user: root
+  tasks:
+    - name: stop a container
+      lxc_container:
+        name: "{{ container_name }}"
+        state: "stopped"
+      delegate_to: "{{ physical_host }}"
