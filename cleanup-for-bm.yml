@@ -1,0 +1,15 @@
+---
+
+- name: Cleanup Rabbit DB
+  hosts: rabbitmq_all
+  tasks:
+    - file:
+        state: absent
+        path: "/var/lib/monasca"
+
+- name: Cleanup HAProxy
+  hosts: haproxy_all
+  tasks:
+    - file:
+        state: absent
+        path: "/etc/haproxy"

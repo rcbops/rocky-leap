@@ -100,7 +100,8 @@ function main {
     pre_flight
     pushd /opt/openstack-ansible
         cp /opt/openstack-ansible/inventory/env.d/nova.yml /etc/openstack_deploy/env.d
-        RUN_TASKS=("/opt/openstack-ansible/playbooks/lxc-containers-destroy.yml -e force_containers_destroy=true -e force_containers_data_destroy=true")
+        RUN_TASKS=("/root/upgrades/cleanup-for-bm.yml")
+        RUN_TASKS+=("/opt/openstack-ansible/playbooks/lxc-containers-destroy.yml -e force_containers_destroy=true -e force_containers_data_destroy=true")
         RUN_TASKS+=("/opt/openstack-ansible/playbooks/setup-hosts.yml -f 50")
         RUN_TASKS+=("/root/upgrades/venv_install.yml")
         RUN_TASKS+=("/opt/openstack-ansible/playbooks/setup-infrastructure.yml -f 50")
