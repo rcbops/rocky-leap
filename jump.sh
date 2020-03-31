@@ -60,9 +60,9 @@ function upgrade_database {
     RUN_TASKS+=("/root/upgrades/upgrade-database-queens.yml")
     RUN_TASKS+=("/root/upgrades/upgrade-database-rocky.yml")
     RUN_TASKS+=("/root/upgrades/post-upgrade-backup.yml")
-    RUN_TASKS+=("/root/upgrades/cheanup-heat.yml")
-    RUN_TASKS+=("/root/upgrades/cheanup-ironic.yml")
-    RUN_TASKS+=("/root/upgrades/cheanup-nova.yml")
+    RUN_TASKS+=("/root/upgrades/cleanup-heat.yml")
+    RUN_TASKS+=("/root/upgrades/cleanup-ironic.yml")
+    RUN_TASKS+=("/root/upgrades/cleanup-nova.yml")
     for item in ${!RUN_TASKS[@]}; do
       run_lock $item "${RUN_TASKS[$item]}"
     done

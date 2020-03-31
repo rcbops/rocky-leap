@@ -7,5 +7,5 @@
   tasks:
     - name: Remove the inventory entries for the deleted containers
       command: >-
-        {{ playbook_dir }}/../../inventory-manage.py -r {{ item }}
+        /opt/openstack-ansible/scripts/inventory-manage.py -r {{ item }}
       with_items: "{{ groups['ironic_conductor_container'] }}"
