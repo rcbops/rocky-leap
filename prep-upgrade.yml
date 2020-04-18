@@ -8,7 +8,7 @@
       shell: ". /root/openrc;openstack endpoint delete $(. /root/openrc;openstack endpoint list | grep identity | grep admin | awk '{print $2}')"
 
 - name: Prep out controllers for upgrade
-  hosts: lxc_hosts
+  hosts: all
   gather_facts: false
   tasks:
     - name: Remove Extra Repos
