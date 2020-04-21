@@ -286,7 +286,7 @@ run apt-get update verify there are no errors
  # nova list --all-t | egrep -iv 'ACTIVE|RUNNING|STOPPED'
  
  Verify all volumes in AVAILABLE or IN-USE state.  Clean up any volumes outside of these states
- # cinder list | egrep -iv 'AVAILABLE|IN-USE'
+ # cinder list --all-t | egrep -iv 'AVAILABLE|IN-USE'
 
 --------------------------------------------------------------------------------
  (5.3) Starting the upgrade to Rocky
