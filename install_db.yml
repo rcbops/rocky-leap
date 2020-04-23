@@ -1,15 +1,34 @@
 ---
 
-- name: import database
-  hosts: localhost
-  vars_files:
-    - "/root/upgrades/defaults.yml"
-  tasks:
-    - name: Bring in database
-      shell: "mysql < {{ dbdump_dir }}/rocky-database.save"
+#- name: import database
+#  hosts: localhost
+#  vars_files:
+#    - "/root/upgrades/defaults.yml"
+#  tasks:
+#    - name: Bring in database
+#      shell: "mysql < {{ dbdump_dir }}/rocky-database.save"
 
-- name: Prepare Permissions
-  hosts: galera_all[0]
+#- name: Prepare Permissions
+#  hosts: galera_all[0]
+#  tasks:
+#    - name: flush permissions
+#      shell: mysql -e 'FLUSH PRIVILEGES;'
+#
+#- name: Place fernet keys back in keystone
+#  hosts: keystone_all
+#  tasks:
+#    - synchronize:
+#        src: "/root/upgrade-venvs/configs/keystone"
+#        dest: "/etc/keystone"
+#        mode: push
+#        recursive: true
+#        rsync_opts:
+#          - "-a"
+#
+- name: Create logs path for glance
+  hosts: glance_all
   tasks:
-    - name: flush permissions
-      shell: mysql -e 'FLUSH PRIVILEGES;'
+    - file:
+        path: /var/log/glance
+        state: directory
+        mode: 0777

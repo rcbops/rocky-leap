@@ -1,6 +1,7 @@
 ---
 
 - name: Cleanup Rabbit DB
+  ignore_errors: true
   hosts: rabbitmq_all
   tasks:
     - file:
@@ -8,6 +9,7 @@
         path: "/var/lib/monasca"
 
 - name: Cleanup HAProxy
+  ignore_errors: true
   hosts: haproxy_all
   tasks:
     - file:
