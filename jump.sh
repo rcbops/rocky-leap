@@ -103,11 +103,10 @@ function main {
         RUN_TASKS+=("/root/upgrades/cleanup-ironic.yml")
         RUN_TASKS+=("/root/upgrades/cleanup-nova.yml")
         RUN_TASKS+=("/root/upgrades/deploy-config-changes.yml")
-        RUN_TASKS+=("/opt/openstack-ansible/playbooks/setup-hosts.yml -f 50")
+        RUN_TASKS+=("/opt/openstack-ansible/playbooks/setup-hosts.yml -f 50 -l '!compute_all'")
         RUN_TASKS+=("/root/upgrades/venv_install.yml")
-        RUN_TASKS+=("/opt/openstack-ansible/playbooks/setup-infrastructure.yml -f 50")
+        RUN_TASKS+=("/opt/openstack-ansible/playbooks/setup-infrastructure.yml -f 50 -l '!compute_all'")
         RUN_TASKS+=("/root/upgrades/install_db.yml")
-        
         RUN_TASKS+=("/opt/openstack-ansible/playbooks/setup-openstack.yml -f 50 -l '!compute_all'")
         for item in ${!RUN_TASKS[@]}; do
           run_lock $item "${RUN_TASKS[$item]}"
