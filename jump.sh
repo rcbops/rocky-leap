@@ -82,7 +82,7 @@ function pre_flight {
         git stash
         git checkout master
         git fetch && git fetch --tags
-        git checkout stable/rocky
+        git checkout stable/queens
         git pull
         echo "Waiting for containers to start up"
         sleep 2m
@@ -107,6 +107,7 @@ function main {
         RUN_TASKS+=("/opt/openstack-ansible/playbooks/setup-infrastructure.yml -f 50 -l '!compute_all'")
         RUN_TASKS+=("/root/upgrades/install_db.yml")
         RUN_TASKS+=("/opt/openstack-ansible/playbooks/setup-openstack.yml -f 50 -l '!compute_all'")
+        RUN_TASKS+=("/opt/openstack-ansible/playbooks/setup-everything.yml -f 50 -l 'compute_all'")
         for item in ${!RUN_TASKS[@]}; do
           run_lock $item "${RUN_TASKS[$item]}"
         done
