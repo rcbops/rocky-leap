@@ -58,7 +58,6 @@ function upgrade_database {
     RUN_TASKS+=("/root/upgrades/upgrade-database-ocata.yml")
     RUN_TASKS+=("/root/upgrades/upgrade-database-pike.yml")
     RUN_TASKS+=("/root/upgrades/upgrade-database-queens.yml")
-    RUN_TASKS+=("/root/upgrades/upgrade-database-rocky.yml")
     RUN_TASKS+=("/root/upgrades/post-upgrade-backup.yml")
     for item in ${!RUN_TASKS[@]}; do
       run_lock $item "${RUN_TASKS[$item]}"
@@ -114,6 +113,6 @@ function main {
     popd
 }
 
-TARGET_SERIES="rocky"
+TARGET_SERIES="queens"
 upgrade_database
 main
