@@ -37,14 +37,15 @@
         state: absent
         path: /root/.pip
 
-- name: Install rabbit overrides
-  hosts: localhost
-  gather_facts: false
-  tasks:
-    - name: Copy override file to openstack_deploy
-      copy:
-        src: /root/upgrades/rabbit_overrides.yml
-        dest: /etc/openstack_deploy/rabbit_overrides.yml
-        owner: root
-        group: root
-        mode: '0644'
+# if customer has 'nova_nova_conf_overrides' or 'neutron_neutron_conf_overrides' in any override files, this will negate them
+#- name: Install rabbit overrides
+#  hosts: localhost
+#  gather_facts: false
+#  tasks:
+#    - name: Copy override file to openstack_deploy
+#      copy:
+#        src: /root/upgrades/rabbit_overrides.yml
+#        dest: /etc/openstack_deploy/rabbit_overrides.yml
+#        owner: root
+#        group: root
+#        mode: '0644'
