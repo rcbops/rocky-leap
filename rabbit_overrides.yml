@@ -5,9 +5,3 @@ oslomsg_rpc_port: '5672'
 rabbitmq_use_ssl: "{{ oslomsg_rpc_use_ssl }}"
 nova_rabbitmq_port: "{{ oslomsg_rpc_port }}"
 neutron_rabbitmq_port: "{{ oslomsg_rpc_port }}"
-neutron_neutron_conf_overrides:
-  DEFAULT:
-    transport_url: "rabbit://{% for host in neutron_rabbitmq_servers.split(',') %}{{ neutron_rabbitmq_userid }}:{{ neutron_rabbitmq_password }}@{{ host }}:{{ neutron_rabbitmq_port }}{% if not loop.last %},{% else %}/{{ neutron_rabbitmq_vhost }}?ssl=0{% endif %}{% endfor %}"
-nova_nova_conf_overrides:
-  DEFAULT:
-    transport_url: "rabbit://{% for host in nova_rabbitmq_servers.split(',') %}{{ nova_rabbitmq_userid }}:{{ nova_rabbitmq_password }}@{{ host }}:{{ nova_rabbitmq_port }}{% if not loop.last %},{% else %}/{{ nova_rabbitmq_vhost }}?ssl=0{% endif %}{% endfor %}"
