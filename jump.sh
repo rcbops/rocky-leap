@@ -59,6 +59,11 @@ function upgrade_database {
     RUN_TASKS+=("/root/upgrades/upgrade-database-pike.yml")
     RUN_TASKS+=("/root/upgrades/upgrade-database-queens.yml")
     RUN_TASKS+=("/root/upgrades/upgrade-database-rocky.yml")
+    RUN_TASKS+=("/root/upgrades/upgrade-database-stein.yml")
+    RUN_TASKS+=("/root/upgrades/upgrade-database-train.yml")
+    RUN_TASKS+=("/root/upgrades/upgrade-database-ussuri.yml")
+    RUN_TASKS+=("/root/upgrades/upgrade-database-victoria.yml")
+    RUN_TASKS+=("/root/upgrades/upgrade-database-wallaby.yml")
     RUN_TASKS+=("/root/upgrades/post-upgrade-backup.yml")
     for item in ${!RUN_TASKS[@]}; do
       run_lock $item "${RUN_TASKS[$item]}"
@@ -83,7 +88,7 @@ function pre_flight {
         git stash
         git checkout master
         git fetch && git fetch --tags
-        git checkout stable/rocky
+        git checkout master
         git pull
         echo "Waiting for containers to start up"
         sleep 2m
@@ -94,7 +99,6 @@ function pre_flight {
 }
 
 function main {
-    pre_flight
     pushd /opt/openstack-ansible
         cp /opt/openstack-ansible/inventory/env.d/nova.yml /etc/openstack_deploy/env.d
         RUN_TASKS=("/opt/openstack-ansible/playbooks/lxc-containers-destroy.yml -e force_containers_destroy=true -e force_containers_data_destroy=true")
@@ -115,6 +119,7 @@ function main {
     popd
 }
 
-TARGET_SERIES="rocky"
+TARGET_SERIES="wallaby"
 upgrade_database
+pre_flight
 main

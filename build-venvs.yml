@@ -31,9 +31,44 @@
         virtualenv_python: python2.7
         extra_args: "{{ upgrade_pip_args | default('') }}"
 
+    - name: Install setuptools for stein venv
+      pip: 
+        name: setuptools
+        virtualenv: /root/upgrade-venvs/stein
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+
+    - name: Install setuptools for train venv
+      pip: 
+        name: setuptools
+        virtualenv: /root/upgrade-venvs/train
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+
+    - name: Install setuptools for ussuri venv
+      pip: 
+        name: setuptools
+        virtualenv: /root/upgrade-venvs/ussuri
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+
+    - name: Install setuptools for victoria venv
+      pip: 
+        name: setuptools
+        virtualenv: /root/upgrade-venvs/victoria
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+
+    - name: Install setuptools for wallaby venv
+      pip: 
+        name: setuptools
+        virtualenv: /root/upgrade-venvs/wallaby
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+
     - name: Install keystone requirements ocata
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/keystone/stable/ocata/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/keystone/ocata-em/requirements.txt
         virtualenv: /root/upgrade-venvs/ocata
         virtualenv_python: python2.7
         extra_args: "{{ upgrade_pip_args | default('') }}"
@@ -47,7 +82,7 @@
 
     - name: Install keystone requirements pike
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/keystone/stable/pike/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/keystone/pike-em/requirements.txt
         virtualenv: /root/upgrade-venvs/pike
         virtualenv_python: python2.7
         extra_args: "{{ upgrade_pip_args | default('') }}"
@@ -61,7 +96,7 @@
 
     - name: Install keystone requirements queens
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/keystone/stable/queens/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/keystone/queens-em/requirements.txt
         virtualenv: /root/upgrade-venvs/queens
         virtualenv_python: python2.7
         extra_args: "{{ upgrade_pip_args | default('') }}"
@@ -75,7 +110,7 @@
 
     - name: Install keystone requirements rocky
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/keystone/stable/rocky/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/keystone/rocky-em/requirements.txt
         virtualenv: /root/upgrade-venvs/rocky
         virtualenv_python: python2.7
         extra_args: "{{ upgrade_pip_args | default('') }}"
@@ -87,6 +122,81 @@
         virtualenv_python: python2.7
         extra_args: "{{ upgrade_pip_args | default('') }}"
 
+
+    - name: Install keystone requirements stein
+      pip: 
+      requirements: https://raw.githubusercontent.com/openstack/keystone/stein-em/requirements.txt
+        virtualenv: /root/upgrade-venvs/stein
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+
+    - name: Install keystone requirements stein pymysql
+      pip: 
+        name: pymysql
+        virtualenv: /root/upgrade-venvs/stein
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+
+
+    - name: Install keystone requirements train
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/keystone/stable/train/requirements.txt
+        virtualenv: /root/upgrade-venvs/train
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+
+    - name: Install keystone requirements train pymysql
+      pip: 
+        name: pymysql
+        virtualenv: /root/upgrade-venvs/train
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+
+
+    - name: Install keystone requirements ussuri
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/keystone/stable/ussuri/requirements.txt
+        virtualenv: /root/upgrade-venvs/ussuri
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+
+    - name: Install keystone requirements ussuri pymysql
+      pip: 
+        name: pymysql
+        virtualenv: /root/upgrade-venvs/ussuri
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+
+
+    - name: Install keystone requirements victoria
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/keystone/stable/victoria/requirements.txt
+        virtualenv: /root/upgrade-venvs/victoria
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+
+    - name: Install keystone requirements victoria pymysql
+      pip: 
+        name: pymysql
+        virtualenv: /root/upgrade-venvs/victoria
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+
+
+    - name: Install keystone requirements wallaby
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/keystone/master/requirements.txt
+        virtualenv: /root/upgrade-venvs/wallaby
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+
+    - name: Install keystone requirements wallaby pymysql
+      pip: 
+        name: pymysql
+        virtualenv: /root/upgrade-venvs/wallaby
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+
     - name: Install glance requirements ocata
       pip: 
         requirements: /root/upgrades/ocata-more-requirements.txt
@@ -96,63 +206,133 @@
 
     - name: Install glance requirements pike
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/glance/stable/pike/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/glance/pike-em/requirements.txt
         virtualenv: /root/upgrade-venvs/pike
         virtualenv_python: python2.7
         extra_args: "{{ upgrade_pip_args | default('') }}"
 
     - name: Install glance requirements queens
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/glance/stable/queens/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/glance/queens-em/requirements.txt
         virtualenv: /root/upgrade-venvs/queens
         virtualenv_python: python2.7
         extra_args: "{{ upgrade_pip_args | default('') }}"
 
     - name: Install glance requirements rocky
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/glance/stable/rocky/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/glance/rocky-em/requirements.txt
         virtualenv: /root/upgrade-venvs/rocky
         virtualenv_python: python2.7
         extra_args: "{{ upgrade_pip_args | default('') }}"
 
+    - name: Install glance requirements stein
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/glance/stein-em/requirements.txt
+        virtualenv: /root/upgrade-venvs/stein
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+
+    - name: Install glance requirements train
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/glance/stable/train/requirements.txt
+        virtualenv: /root/upgrade-venvs/train
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+
+    - name: Install glance requirements ussuri
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/glance/stable/ussuri/requirements.txt
+        virtualenv: /root/upgrade-venvs/ussuri
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+
+    - name: Install glance requirements victoria
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/glance/stable/victoria/requirements.txt
+        virtualenv: /root/upgrade-venvs/victoria
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+
+    - name: Install glance requirements wallaby
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/glance/master/requirements.txt
+        virtualenv: /root/upgrade-venvs/wallaby
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+
     - name: Install cinder requirements ocata
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/cinder/stable/ocata/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/cinder/ocata-em/requirements.txt
         virtualenv: /root/upgrade-venvs/ocata
         virtualenv_python: python2.7
         extra_args: "{{ upgrade_pip_args | default('') }}"
 
     - name: Install cinder requirements pike
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/cinder/stable/pike/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/cinder/pike-em/requirements.txt
         virtualenv: /root/upgrade-venvs/pike
         virtualenv_python: python2.7
         extra_args: "{{ upgrade_pip_args | default('') }}"
 
     - name: Install cinder requirements queens
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/cinder/stable/queens/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/cinder/queens-em/requirements.txt
         virtualenv: /root/upgrade-venvs/queens
         virtualenv_python: python2.7
         extra_args: "{{ upgrade_pip_args | default('') }}"
 
     - name: Install cinder requirements rocky
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/cinder/stable/rocky/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/cinder/rocky-em/requirements.txt
         virtualenv: /root/upgrade-venvs/rocky
         virtualenv_python: python2.7
         extra_args: "{{ upgrade_pip_args | default('') }}"
 
+    - name: Install cinder requirements stein
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/cinder/stein-em/requirements.txt
+        virtualenv: /root/upgrade-venvs/stein
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+
+    - name: Install cinder requirements train
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/cinder/stable/train/requirements.txt
+        virtualenv: /root/upgrade-venvs/train
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+
+    - name: Install cinder requirements ussuri
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/cinder/stable/ussuri/requirements.txt
+        virtualenv: /root/upgrade-venvs/ussuri
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+
+    - name: Install cinder requirements victoria
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/cinder/stable/victoria/requirements.txt
+        virtualenv: /root/upgrade-venvs/victoria
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+
+    - name: Install cinder requirements wallaby
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/cinder/master/requirements.txt
+        virtualenv: /root/upgrade-venvs/wallaby
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+
     - name: Install nova requirements ocata
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/nova/stable/ocata/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/nova/ocata-em/requirements.txt
         virtualenv: /root/upgrade-venvs/ocata
         virtualenv_python: python2.7
         extra_args: "{{ upgrade_pip_args | default('') }}"
 
     - name: Install nova requirements pike
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/nova/stable/pike/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/nova/pike-em/requirements.txt
         virtualenv: /root/upgrade-venvs/pike
         virtualenv_python: python2.7
         extra_args: "{{ upgrade_pip_args | default('') }}"
@@ -166,35 +346,70 @@
 
     - name: Install nova requirements queens
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/nova/stable/queens/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/nova/queens-em/requirements.txt
         virtualenv: /root/upgrade-venvs/queens
         virtualenv_python: python2.7
         extra_args: "{{ upgrade_pip_args | default('') }}"
 
     - name: Install nova requirements rocky
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/nova/stable/rocky/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/nova/rocky-em/requirements.txt
         virtualenv: /root/upgrade-venvs/rocky
         virtualenv_python: python2.7
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+
+    - name: Install nova requirements stein
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/nova/stein-em/requirements.txt
+        virtualenv: /root/upgrade-venvs/stein
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+
+    - name: Install nova requirements train
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/nova/stable/train/requirements.txt
+        virtualenv: /root/upgrade-venvs/train
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+
+    - name: Install nova requirements ussuri
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/nova/stable/ussuri/requirements.txt
+        virtualenv: /root/upgrade-venvs/ussuri
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+
+    - name: Install nova requirements victoria
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/nova/stable/victoria/requirements.txt
+        virtualenv: /root/upgrade-venvs/victoria
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+
+    - name: Install nova requirements wallaby
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/nova/master/requirements.txt
+        virtualenv: /root/upgrade-venvs/wallaby
+        virtualenv_python: python3
         extra_args: "{{ upgrade_pip_args | default('') }}"
   
     - name: Install neutron requirements ocata
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/neutron/stable/ocata/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/neutron/ocata-em/requirements.txt
         virtualenv: /root/upgrade-venvs/ocata
         virtualenv_python: python2.7
         extra_args: "{{ upgrade_pip_args | default('') }}"
 
     - name: Install neutron requirements pike
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/neutron/stable/pike/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/neutron/pike-em/requirements.txt
         virtualenv: /root/upgrade-venvs/pike
         virtualenv_python: python2.7
         extra_args: "{{ upgrade_pip_args | default('') }}"
 
     - name: Install neutron requirements queens
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/neutron/stable/queens/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/neutron/queens-em/requirements.txt
         virtualenv: /root/upgrade-venvs/queens
         virtualenv_python: python2.7
         extra_args: "{{ upgrade_pip_args | default('') }}"
@@ -212,230 +427,545 @@
         virtualenv: /root/upgrade-venvs/rocky
         virtualenv_python: python2.7
         extra_args: "{{ upgrade_pip_args | default('') }}"
+
+    - name: Install neutron requirements stein
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/neutron/stein-em/requirements.txt
+        virtualenv: /root/upgrade-venvs/stein
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+
+    - name: Install neutron requirements train
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/neutron/stable/train/requirements.txt
+        virtualenv: /root/upgrade-venvs/train
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+
+    - name: Install neutron requirements ussuri
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/neutron/stable/ussuri/requirements.txt
+        virtualenv: /root/upgrade-venvs/ussuri
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+
+    - name: Install neutron requirements victoria
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/neutron/stable/victoria/requirements.txt
+        virtualenv: /root/upgrade-venvs/victoria
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+
+    - name: Install neutron requirements wallaby
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/neutron/master/requirements.txt
+        virtualenv: /root/upgrade-venvs/wallaby
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
   
     - name: Install designate requirements ocata
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/designate/stable/ocata/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/designate/ocata-em/requirements.txt
         virtualenv: /root/upgrade-venvs/ocata
         virtualenv_python: python2.7
         extra_args: "{{ upgrade_pip_args | default('') }}"
 
     - name: Install designate requirements pike
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/designate/stable/pike/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/designate/pike-em/requirements.txt
         virtualenv: /root/upgrade-venvs/pike
         virtualenv_python: python2.7
         extra_args: "{{ upgrade_pip_args | default('') }}"
   
     - name: Install designate requirements queens
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/designate/stable/queens/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/designate/queens-em/requirements.txt
         virtualenv: /root/upgrade-venvs/queens
         virtualenv_python: python2.7
         extra_args: "{{ upgrade_pip_args | default('') }}"
   
     - name: Install designate requirements rocky
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/designate/stable/rocky/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/designate/rocky-em/requirements.txt
         virtualenv: /root/upgrade-venvs/rocky
         virtualenv_python: python2.7
         extra_args: "{{ upgrade_pip_args | default('') }}"
   
+    - name: Install designate requirements stein
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/designate/stein-em/requirements.txt
+        virtualenv: /root/upgrade-venvs/stein
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+  
+    - name: Install designate requirements train
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/designate/stable/train/requirements.txt
+        virtualenv: /root/upgrade-venvs/train
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+  
+    - name: Install designate requirements ussuri
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/designate/stable/ussuri/requirements.txt
+        virtualenv: /root/upgrade-venvs/ussuri
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+  
+    - name: Install designate requirements victoria
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/designate/stable/victoria/requirements.txt
+        virtualenv: /root/upgrade-venvs/victoria
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+  
+    - name: Install designate requirements wallaby
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/designate/master/requirements.txt
+        virtualenv: /root/upgrade-venvs/wallaby
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+  
     - name: Install heat requirements ocata
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/heat/stable/ocata/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/heat/ocata-em/requirements.txt
         virtualenv: /root/upgrade-venvs/ocata
         virtualenv_python: python2.7
         extra_args: "{{ upgrade_pip_args | default('') }}"
 
     - name: Install heat requirements pike
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/heat/stable/pike/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/heat/pike-em/requirements.txt
         virtualenv: /root/upgrade-venvs/pike
         virtualenv_python: python2.7
         extra_args: "{{ upgrade_pip_args | default('') }}"
   
     - name: Install heat requirements queens
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/heat/stable/queens/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/heat/queens-em/requirements.txt
         virtualenv: /root/upgrade-venvs/queens
         virtualenv_python: python2.7
         extra_args: "{{ upgrade_pip_args | default('') }}"
   
     - name: Install heat requirements rocky
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/heat/stable/rocky/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/heat/rocky-em/requirements.txt
         virtualenv: /root/upgrade-venvs/rocky
         virtualenv_python: python2.7
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+  
+    - name: Install heat requirements stein
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/heat/stein-em/requirements.txt
+        virtualenv: /root/upgrade-venvs/stein
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+  
+    - name: Install heat requirements train
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/heat/stable/train/requirements.txt
+        virtualenv: /root/upgrade-venvs/train
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+  
+    - name: Install heat requirements ussuri
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/heat/stable/ussuri/requirements.txt
+        virtualenv: /root/upgrade-venvs/ussuri
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+  
+    - name: Install heat requirements victoria
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/heat/stable/victoria/requirements.txt
+        virtualenv: /root/upgrade-venvs/victoria
+        virtualenv_python: python3
+        extra_args: "{{ upgrade_pip_args | default('') }}"
+  
+    - name: Install heat requirements wallaby
+      pip: 
+        requirements: https://raw.githubusercontent.com/openstack/heat/master/requirements.txt
+        virtualenv: /root/upgrade-venvs/wallaby
+        virtualenv_python: python3
         extra_args: "{{ upgrade_pip_args | default('') }}"
   
     - name: Checkout keystone ocata
       git:
         repo: 'https://github.com/openstack/keystone.git'
         dest: /root/upgrade-venvs/ocata/src/keystone
-        version: stable/ocata
+        version: ocata-em
   
     - name: Checkout keystone pike
       git:
         repo: 'https://github.com/openstack/keystone.git'
         dest: /root/upgrade-venvs/pike/src/keystone
-        version: stable/pike
+        version: pike-em
   
     - name: Checkout keystone queens
       git:
         repo: 'https://github.com/openstack/keystone.git'
         dest: /root/upgrade-venvs/queens/src/keystone
-        version: stable/queens
+        version: queens-em
   
     - name: Checkout keystone rocky
       git:
         repo: 'https://github.com/openstack/keystone.git'
         dest: /root/upgrade-venvs/rocky/src/keystone
-        version: stable/rocky
+        version: rocky-em
+  
+    - name: Checkout keystone stein
+      git:
+        repo: 'https://github.com/openstack/keystone.git'
+        dest: /root/upgrade-venvs/stein/src/keystone
+        version: stein-em
+  
+    - name: Checkout keystone train
+      git:
+        repo: 'https://github.com/openstack/keystone.git'
+        dest: /root/upgrade-venvs/train/src/keystone
+        version: stable/train
+  
+    - name: Checkout keystone ussuri
+      git:
+        repo: 'https://github.com/openstack/keystone.git'
+        dest: /root/upgrade-venvs/ussuri/src/keystone
+        version: stable/ussuri
+  
+    - name: Checkout keystone victoria
+      git:
+        repo: 'https://github.com/openstack/keystone.git'
+        dest: /root/upgrade-venvs/victoria/src/keystone
+        version: stable/victoria
+  
+    - name: Checkout keystone wallaby
+      git:
+        repo: 'https://github.com/openstack/keystone.git'
+        dest: /root/upgrade-venvs/wallaby/src/keystone
+        version: master
   
     - name: Checkout glance ocata
       git:
         repo: 'https://github.com/openstack/glance.git'
         dest: /root/upgrade-venvs/ocata/src/glance
-        version: stable/ocata
+        version: ocata-em
   
     - name: Checkout glance pike
       git:
         repo: 'https://github.com/openstack/glance.git'
         dest: /root/upgrade-venvs/pike/src/glance
-        version: stable/pike
+        version: pike-em
   
     - name: Checkout glance queens
       git:
         repo: 'https://github.com/openstack/glance.git'
         dest: /root/upgrade-venvs/queens/src/glance
-        version: stable/queens
+        version: queens-em
   
     - name: Checkout glance rocky
       git:
         repo: 'https://github.com/openstack/glance.git'
         dest: /root/upgrade-venvs/rocky/src/glance
-        version: stable/rocky
+        version: rocky-em
+  
+    - name: Checkout glance stein
+      git:
+        repo: 'https://github.com/openstack/glance.git'
+        dest: /root/upgrade-venvs/stein/src/glance
+        version: stein-em
+  
+    - name: Checkout glance train
+      git:
+        repo: 'https://github.com/openstack/glance.git'
+        dest: /root/upgrade-venvs/train/src/glance
+        version: stable/train
+  
+    - name: Checkout glance ussuri
+      git:
+        repo: 'https://github.com/openstack/glance.git'
+        dest: /root/upgrade-venvs/ussuri/src/glance
+        version: stable/ussuri
+  
+    - name: Checkout glance victoria
+      git:
+        repo: 'https://github.com/openstack/glance.git'
+        dest: /root/upgrade-venvs/victoria/src/glance
+        version: stable/victoria
+  
+    - name: Checkout glance wallaby
+      git:
+        repo: 'https://github.com/openstack/glance.git'
+        dest: /root/upgrade-venvs/wallaby/src/glance
+        version: master
   
     - name: Checkout cinder ocata
       git:
         repo: 'https://github.com/openstack/cinder.git'
         dest: /root/upgrade-venvs/ocata/src/cinder
-        version: stable/ocata
+        version: ocata-em
   
     - name: Checkout cinder pike
       git:
         repo: 'https://github.com/openstack/cinder.git'
         dest: /root/upgrade-venvs/pike/src/cinder
-        version: stable/pike
+        version: pike-em
   
     - name: Checkout cinder queens
       git:
         repo: 'https://github.com/openstack/cinder.git'
         dest: /root/upgrade-venvs/queens/src/cinder
-        version: stable/queens
+        version: queens-em
   
     - name: Checkout cinder rocky
       git:
         repo: 'https://github.com/openstack/cinder.git'
         dest: /root/upgrade-venvs/rocky/src/cinder
-        version: stable/rocky
+        version: rocky-em
+  
+    - name: Checkout cinder stein
+      git:
+        repo: 'https://github.com/openstack/cinder.git'
+        dest: /root/upgrade-venvs/stein/src/cinder
+        version: stein-em
+  
+    - name: Checkout cinder train
+      git:
+        repo: 'https://github.com/openstack/cinder.git'
+        dest: /root/upgrade-venvs/train/src/cinder
+        version: stable/train
+  
+    - name: Checkout cinder ussuri
+      git:
+        repo: 'https://github.com/openstack/cinder.git'
+        dest: /root/upgrade-venvs/ussuri/src/cinder
+        version: stable/ussuri
+  
+    - name: Checkout cinder victoria
+      git:
+        repo: 'https://github.com/openstack/cinder.git'
+        dest: /root/upgrade-venvs/victoria/src/cinder
+        version: stable/victoria
+  
+    - name: Checkout cinder wallaby
+      git:
+        repo: 'https://github.com/openstack/cinder.git'
+        dest: /root/upgrade-venvs/wallaby/src/cinder
+        version: master
   
     - name: Checkout nova ocata
       git:
         repo: 'https://github.com/openstack/nova.git'
         dest: /root/upgrade-venvs/ocata/src/nova
-        version: stable/ocata
+        version: ocata-em
   
     - name: Checkout nova pike
       git:
         repo: 'https://github.com/openstack/nova.git'
         dest: /root/upgrade-venvs/pike/src/nova
-        version: stable/pike
+        version: pike-em
   
     - name: Checkout nova queens
       git:
         repo: 'https://github.com/openstack/nova.git'
         dest: /root/upgrade-venvs/queens/src/nova
-        version: stable/queens
+        version: queens-em
   
     - name: Checkout nova rocky
       git:
         repo: 'https://github.com/openstack/nova.git'
         dest: /root/upgrade-venvs/rocky/src/nova
-        version: stable/rocky
+        version: rocky-em
+  
+    - name: Checkout nova stein
+      git:
+        repo: 'https://github.com/openstack/nova.git'
+        dest: /root/upgrade-venvs/stein/src/nova
+        version: stein-em
+  
+    - name: Checkout nova train
+      git:
+        repo: 'https://github.com/openstack/nova.git'
+        dest: /root/upgrade-venvs/train/src/nova
+        version: stable/train
+  
+    - name: Checkout nova ussuri
+      git:
+        repo: 'https://github.com/openstack/nova.git'
+        dest: /root/upgrade-venvs/ussuri/src/nova
+        version: stable/ussuri
+  
+    - name: Checkout nova victoria
+      git:
+        repo: 'https://github.com/openstack/nova.git'
+        dest: /root/upgrade-venvs/victoria/src/nova
+        version: stable/victoria
+  
+    - name: Checkout nova wallaby
+      git:
+        repo: 'https://github.com/openstack/nova.git'
+        dest: /root/upgrade-venvs/wallaby/src/nova
+        version: master
   
     - name: Checkout neutron ocata
       git:
         repo: 'https://github.com/openstack/neutron.git'
         dest: /root/upgrade-venvs/ocata/src/neutron
-        version: stable/ocata
+        version: ocata-em
   
     - name: Checkout neutron pike
       git:
         repo: 'https://github.com/openstack/neutron.git'
         dest: /root/upgrade-venvs/pike/src/neutron
-        version: stable/pike
+        version: pike-em
   
     - name: Checkout neutron queens
       git:
         repo: 'https://github.com/openstack/neutron.git'
         dest: /root/upgrade-venvs/queens/src/neutron
-        version: stable/queens
+        version: queens-em
   
     - name: Checkout neutron rocky
       git:
         repo: 'https://github.com/openstack/neutron.git'
         dest: /root/upgrade-venvs/rocky/src/neutron
-        version: stable/rocky
+        version: rocky-em
+  
+    - name: Checkout neutron stein
+      git:
+        repo: 'https://github.com/openstack/neutron.git'
+        dest: /root/upgrade-venvs/stein/src/neutron
+        version: stein-em
+  
+    - name: Checkout neutron train
+      git:
+        repo: 'https://github.com/openstack/neutron.git'
+        dest: /root/upgrade-venvs/train/src/neutron
+        version: stable/train
+  
+    - name: Checkout neutron ussuri
+      git:
+        repo: 'https://github.com/openstack/neutron.git'
+        dest: /root/upgrade-venvs/ussuri/src/neutron
+        version: stable/ussuri
+  
+    - name: Checkout neutron victoria
+      git:
+        repo: 'https://github.com/openstack/neutron.git'
+        dest: /root/upgrade-venvs/victoria/src/neutron
+        version: stable/victoria
+  
+    - name: Checkout neutron wallaby
+      git:
+        repo: 'https://github.com/openstack/neutron.git'
+        dest: /root/upgrade-venvs/wallaby/src/neutron
+        version: master
   
     - name: Checkout designate ocata
       git:
         repo: 'https://github.com/openstack/designate.git'
         dest: /root/upgrade-venvs/ocata/src/designate
-        version: stable/ocata
+        version: ocata-em
   
     - name: Checkout designate pike
       git:
         repo: 'https://github.com/openstack/designate.git'
         dest: /root/upgrade-venvs/pike/src/designate
-        version: stable/pike
+        version: pike-em
   
     - name: Checkout designate queens
       git:
         repo: 'https://github.com/openstack/designate.git'
         dest: /root/upgrade-venvs/queens/src/designate
-        version: stable/queens
+        version: queens-em
   
     - name: Checkout designate rocky
       git:
         repo: 'https://github.com/openstack/designate.git'
         dest: /root/upgrade-venvs/rocky/src/designate
-        version: stable/rocky
+        version: rocky-em
+  
+    - name: Checkout designate stein
+      git:
+        repo: 'https://github.com/openstack/designate.git'
+        dest: /root/upgrade-venvs/stein/src/designate
+        version: stein-em
+  
+    - name: Checkout designate train
+      git:
+        repo: 'https://github.com/openstack/designate.git'
+        dest: /root/upgrade-venvs/train/src/designate
+        version: stable/train
+  
+    - name: Checkout designate ussuri
+      git:
+        repo: 'https://github.com/openstack/designate.git'
+        dest: /root/upgrade-venvs/ussuri/src/designate
+        version: stable/ussuri
+  
+    - name: Checkout designate victoria
+      git:
+        repo: 'https://github.com/openstack/designate.git'
+        dest: /root/upgrade-venvs/victoria/src/designate
+        version: stable/victoria
+  
+    - name: Checkout designate wallaby
+      git:
+        repo: 'https://github.com/openstack/designate.git'
+        dest: /root/upgrade-venvs/wallaby/src/designate
+        version: master
   
     - name: Checkout heat ocata
       git:
         repo: 'https://github.com/openstack/heat.git'
         dest: /root/upgrade-venvs/ocata/src/heat
-        version: stable/ocata
+        version: ocata-em
   
     - name: Checkout heat pike
       git:
         repo: 'https://github.com/openstack/heat.git'
         dest: /root/upgrade-venvs/pike/src/heat
-        version: stable/pike
+        version: pike-em
   
     - name: Checkout heat queens
       git:
         repo: 'https://github.com/openstack/heat.git'
         dest: /root/upgrade-venvs/queens/src/heat
-        version: stable/queens
+        version: queens-em
   
     - name: Checkout heat rocky
       git:
         repo: 'https://github.com/openstack/heat.git'
         dest: /root/upgrade-venvs/rocky/src/heat
-        version: stable/rocky
+        version: rocky-em
+  
+    - name: Checkout heat stein
+      git:
+        repo: 'https://github.com/openstack/heat.git'
+        dest: /root/upgrade-venvs/stein/src/heat
+        version: stein-em
+  
+    - name: Checkout heat train
+      git:
+        repo: 'https://github.com/openstack/heat.git'
+        dest: /root/upgrade-venvs/train/src/heat
+        version: stable/train
+  
+    - name: Checkout heat ussuri
+      git:
+        repo: 'https://github.com/openstack/heat.git'
+        dest: /root/upgrade-venvs/ussuri/src/heat
+        version: stable/ussuri
+  
+    - name: Checkout heat victoria
+      git:
+        repo: 'https://github.com/openstack/heat.git'
+        dest: /root/upgrade-venvs/victoria/src/heat
+        version: stable/victoria
+  
+    - name: Checkout heat wallaby
+      git:
+        repo: 'https://github.com/openstack/heat.git'
+        dest: /root/upgrade-venvs/wallaby/src/heat
+        version: master
   
     - name: setup keystone ocata
       shell: "/root/upgrade-venvs/ocata/bin/python /root/upgrade-venvs/ocata/src/keystone/setup.py install"
@@ -457,6 +987,31 @@
       args:
         chdir: /root/upgrade-venvs/rocky/src/keystone/
     
+    - name: setup keystone stein
+      shell: "/root/upgrade-venvs/stein/bin/python /root/upgrade-venvs/stein/src/keystone/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/stein/src/keystone/
+    
+    - name: setup keystone train
+      shell: "/root/upgrade-venvs/train/bin/python /root/upgrade-venvs/train/src/keystone/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/train/src/keystone/
+    
+    - name: setup keystone ussuri
+      shell: "/root/upgrade-venvs/ussuri/bin/python /root/upgrade-venvs/ussuri/src/keystone/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/ussuri/src/keystone/
+    
+    - name: setup keystone victoria
+      shell: "/root/upgrade-venvs/victoria/bin/python /root/upgrade-venvs/victoria/src/keystone/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/victoria/src/keystone/
+    
+    - name: setup keystone wallaby
+      shell: "/root/upgrade-venvs/wallaby/bin/python /root/upgrade-venvs/wallaby/src/keystone/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/wallaby/src/keystone/
+    
     - name: setup glance ocata
       shell: "/root/upgrade-venvs/ocata/bin/python /root/upgrade-venvs/ocata/src/glance/setup.py install"
       args:
@@ -476,6 +1031,31 @@
       shell: "/root/upgrade-venvs/rocky/bin/python /root/upgrade-venvs/rocky/src/glance/setup.py install"
       args:
         chdir: /root/upgrade-venvs/rocky/src/glance/
+    
+    - name: setup glance stein
+      shell: "/root/upgrade-venvs/stein/bin/python /root/upgrade-venvs/stein/src/glance/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/stein/src/glance/
+    
+    - name: setup glance train
+      shell: "/root/upgrade-venvs/train/bin/python /root/upgrade-venvs/train/src/glance/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/train/src/glance/
+    
+    - name: setup glance ussuri
+      shell: "/root/upgrade-venvs/ussuri/bin/python /root/upgrade-venvs/ussuri/src/glance/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/ussuri/src/glance/
+    
+    - name: setup glance victoria
+      shell: "/root/upgrade-venvs/victoria/bin/python /root/upgrade-venvs/victoria/src/glance/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/victoria/src/glance/
+    
+    - name: setup glance wallaby
+      shell: "/root/upgrade-venvs/wallaby/bin/python /root/upgrade-venvs/wallaby/src/glance/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/wallaby/src/glance/
     
     - name: setup cinder ocata
       shell: "/root/upgrade-venvs/ocata/bin/python /root/upgrade-venvs/ocata/src/cinder/setup.py install"
@@ -497,6 +1077,31 @@
       args:
         chdir: /root/upgrade-venvs/rocky/src/cinder/
     
+    - name: setup cinder stein
+      shell: "/root/upgrade-venvs/stein/bin/python /root/upgrade-venvs/stein/src/cinder/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/stein/src/cinder/
+    
+    - name: setup cinder train
+      shell: "/root/upgrade-venvs/train/bin/python /root/upgrade-venvs/train/src/cinder/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/train/src/cinder/
+    
+    - name: setup cinder ussuri
+      shell: "/root/upgrade-venvs/ussuri/bin/python /root/upgrade-venvs/ussuri/src/cinder/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/ussuri/src/cinder/
+    
+    - name: setup cinder victoria
+      shell: "/root/upgrade-venvs/victoria/bin/python /root/upgrade-venvs/victoria/src/cinder/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/victoria/src/cinder/
+    
+    - name: setup cinder wallaby
+      shell: "/root/upgrade-venvs/wallaby/bin/python /root/upgrade-venvs/wallaby/src/cinder/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/wallaby/src/cinder/
+    
     - name: setup nova ocata
       shell: "/root/upgrade-venvs/ocata/bin/python /root/upgrade-venvs/ocata/src/nova/setup.py install"
       args:
@@ -516,6 +1121,31 @@
       shell: "/root/upgrade-venvs/rocky/bin/python /root/upgrade-venvs/rocky/src/nova/setup.py install"
       args:
         chdir: /root/upgrade-venvs/rocky/src/nova/
+    
+    - name: setup nova stein
+      shell: "/root/upgrade-venvs/stein/bin/python /root/upgrade-venvs/stein/src/nova/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/stein/src/nova/
+    
+    - name: setup nova train
+      shell: "/root/upgrade-venvs/train/bin/python /root/upgrade-venvs/train/src/nova/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/train/src/nova/
+    
+    - name: setup nova ussuri
+      shell: "/root/upgrade-venvs/ussuri/bin/python /root/upgrade-venvs/ussuri/src/nova/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/ussuri/src/nova/
+    
+    - name: setup nova victoria
+      shell: "/root/upgrade-venvs/victoria/bin/python /root/upgrade-venvs/victoria/src/nova/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/victoria/src/nova/
+    
+    - name: setup nova wallaby
+      shell: "/root/upgrade-venvs/wallaby/bin/python /root/upgrade-venvs/wallaby/src/nova/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/wallaby/src/nova/
     
     - name: setup neutron ocata
       shell: "/root/upgrade-venvs/ocata/bin/python /root/upgrade-venvs/ocata/src/neutron/setup.py install"
@@ -537,6 +1167,31 @@
       args:
         chdir: /root/upgrade-venvs/rocky/src/neutron/
     
+    - name: setup neutron stein
+      shell: "/root/upgrade-venvs/stein/bin/python /root/upgrade-venvs/stein/src/neutron/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/stein/src/neutron/
+    
+    - name: setup neutron train
+      shell: "/root/upgrade-venvs/train/bin/python /root/upgrade-venvs/train/src/neutron/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/train/src/neutron/
+    
+    - name: setup neutron ussuri
+      shell: "/root/upgrade-venvs/ussuri/bin/python /root/upgrade-venvs/ussuri/src/neutron/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/ussuri/src/neutron/
+    
+    - name: setup neutron victoria
+      shell: "/root/upgrade-venvs/victoria/bin/python /root/upgrade-venvs/victoria/src/neutron/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/victoria/src/neutron/
+    
+    - name: setup neutron wallaby
+      shell: "/root/upgrade-venvs/wallaby/bin/python /root/upgrade-venvs/wallaby/src/neutron/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/wallaby/src/neutron/
+    
     - name: setup designate ocata
       shell: "/root/upgrade-venvs/ocata/bin/python /root/upgrade-venvs/ocata/src/designate/setup.py install"
       args:
@@ -552,11 +1207,36 @@
       args:
         chdir: /root/upgrade-venvs/queens/src/designate/
     
-    - name: setup neutron rocky
+    - name: setup designate rocky
       shell: "/root/upgrade-venvs/rocky/bin/python /root/upgrade-venvs/rocky/src/designate/setup.py install"
       args:
         chdir: /root/upgrade-venvs/rocky/src/designate/
     
+    - name: setup designate stein
+      shell: "/root/upgrade-venvs/stein/bin/python /root/upgrade-venvs/stein/src/designate/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/stein/src/designate/
+    
+    - name: setup designate train
+      shell: "/root/upgrade-venvs/train/bin/python /root/upgrade-venvs/train/src/designate/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/train/src/designate/
+    
+    - name: setup designate ussuri
+      shell: "/root/upgrade-venvs/ussuri/bin/python /root/upgrade-venvs/ussuri/src/designate/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/ussuri/src/designate/
+    
+    - name: setup designate victoria
+      shell: "/root/upgrade-venvs/victoria/bin/python /root/upgrade-venvs/victoria/src/designate/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/victoria/src/designate/
+    
+    - name: setup designate wallaby
+      shell: "/root/upgrade-venvs/wallaby/bin/python /root/upgrade-venvs/wallaby/src/designate/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/wallaby/src/designate/
+
     - name: setup heat ocata
       shell: "/root/upgrade-venvs/ocata/bin/python /root/upgrade-venvs/ocata/src/heat/setup.py install"
       args:
@@ -576,3 +1256,28 @@
       shell: "/root/upgrade-venvs/rocky/bin/python /root/upgrade-venvs/rocky/src/heat/setup.py install"
       args:
         chdir: /root/upgrade-venvs/rocky/src/heat/
+    
+    - name: setup heat stein
+      shell: "/root/upgrade-venvs/stein/bin/python /root/upgrade-venvs/stein/src/heat/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/stein/src/heat/
+    
+    - name: setup heat train
+      shell: "/root/upgrade-venvs/train/bin/python /root/upgrade-venvs/train/src/heat/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/train/src/heat/
+    
+    - name: setup heat ussuri
+      shell: "/root/upgrade-venvs/ussuri/bin/python /root/upgrade-venvs/ussuri/src/heat/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/ussuri/src/heat/
+    
+    - name: setup heat victoria
+      shell: "/root/upgrade-venvs/victoria/bin/python /root/upgrade-venvs/victoria/src/heat/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/victoria/src/heat/
+    
+    - name: setup heat wallaby
+      shell: "/root/upgrade-venvs/wallaby/bin/python /root/upgrade-venvs/wallaby/src/heat/setup.py install"
+      args:
+        chdir: /root/upgrade-venvs/wallaby/src/heat/

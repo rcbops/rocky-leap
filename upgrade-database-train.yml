@@ -1,0 +1,31 @@
+---
+
+- name: Prepare Virt Environments
+  hosts: localhost
+  tasks:
+    - name: Perform train Keystone DB sync
+      shell: "/root/upgrade-venvs/train/bin/keystone-manage db_sync"
+
+    - name: Perform train glance DB sync
+      shell: "/root/upgrade-venvs/train/bin/glance-manage db sync"
+
+    - name: Perform train cinder DB sync
+      shell: "/root/upgrade-venvs/train/bin/cinder-manage db sync"
+
+    - name: Perform train Nova API DB sync
+      shell: "/root/upgrade-venvs/train/bin/nova-manage api_db sync"
+
+    - name: Perform train Nova DB sync
+      shell: "/root/upgrade-venvs/train/bin/nova-manage db sync"
+
+    - name: Perform train neutron DB upgrade
+      shell: "/root/upgrade-venvs/train/bin/neutron-db-manage upgrade --expand"
+
+    - name: Perform train neutron DB offline migrations
+      shell: "/root/upgrade-venvs/train/bin/neutron-db-manage has_offline_migrations"
+
+    - name: Perform train designate DB upgrade
+      shell: "/root/upgrade-venvs/train/bin/designate-manage database sync"
+
+    - name: Perform train heat DB upgrade
+      shell: "/root/upgrade-venvs/train/bin/heat-manage db_sync"

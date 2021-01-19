@@ -1,0 +1,31 @@
+---
+
+- name: Prepare Virt Environments
+  hosts: localhost
+  tasks:
+    - name: Perform stein Keystone DB sync
+      shell: "/root/upgrade-venvs/stein/bin/keystone-manage db_sync"
+
+    - name: Perform stein glance DB sync
+      shell: "/root/upgrade-venvs/stein/bin/glance-manage db sync"
+
+    - name: Perform stein cinder DB sync
+      shell: "/root/upgrade-venvs/stein/bin/cinder-manage db sync"
+
+    - name: Perform stein Nova API DB sync
+      shell: "/root/upgrade-venvs/stein/bin/nova-manage api_db sync"
+
+    - name: Perform stein Nova DB sync
+      shell: "/root/upgrade-venvs/stein/bin/nova-manage db sync"
+
+    - name: Perform stein neutron DB upgrade
+      shell: "/root/upgrade-venvs/stein/bin/neutron-db-manage upgrade --expand"
+
+    - name: Perform stein neutron DB offline migrations
+      shell: "/root/upgrade-venvs/stein/bin/neutron-db-manage has_offline_migrations"
+
+    - name: Perform stein designate DB upgrade
+      shell: "/root/upgrade-venvs/stein/bin/designate-manage database sync"
+
+    - name: Perform stein heat DB upgrade
+      shell: "/root/upgrade-venvs/stein/bin/heat-manage db_sync"
