@@ -102,7 +102,7 @@ python-mimeparse==1.6.0
 python-neutronclient==6.7.0
 python-novaclient==10.1.0
 pytz==2017.3
-PyYAML==3.12
+PyYAML==5.4
 repoze.lru==0.7
 requests==2.18.4
 requestsexceptions==1.4.0
