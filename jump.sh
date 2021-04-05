@@ -55,10 +55,10 @@ function upgrade_database {
     RUN_TASKS+=("/root/upgrades/build-configs.yml")
     RUN_TASKS+=("/root/upgrades/build-venvs.yml")
     RUN_TASKS+=("/root/upgrades/shutdown-containers.yml")
-    RUN_TASKS+=("/root/upgrades/upgrade-database-ocata.yml")
-    RUN_TASKS+=("/root/upgrades/upgrade-database-pike.yml")
-    RUN_TASKS+=("/root/upgrades/upgrade-database-queens.yml")
-    RUN_TASKS+=("/root/upgrades/upgrade-database-rocky.yml")
+#    RUN_TASKS+=("/root/upgrades/upgrade-database-ocata.yml")
+#    RUN_TASKS+=("/root/upgrades/upgrade-database-pike.yml")
+#    RUN_TASKS+=("/root/upgrades/upgrade-database-queens.yml")
+#    RUN_TASKS+=("/root/upgrades/upgrade-database-rocky.yml")
     RUN_TASKS+=("/root/upgrades/upgrade-database-stein.yml")
     RUN_TASKS+=("/root/upgrades/upgrade-database-train.yml")
     RUN_TASKS+=("/root/upgrades/upgrade-database-ussuri.yml")
@@ -121,5 +121,5 @@ function main {
 
 TARGET_SERIES="wallaby"
 upgrade_database
-pre_flight
-main
+#pre_flight
+#main

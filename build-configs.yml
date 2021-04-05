@@ -70,6 +70,7 @@
           - "-a"
 
 - name: Get config files from cinder container
+  ignore_errors: true
   hosts: cinder_all[0]
   tasks:
     - synchronize:  
@@ -102,16 +103,16 @@
         rsync_opts:
           - "-a"
 
-- name: Get config files from designate container
-  hosts: designate_all[0]
-  tasks:
-    - synchronize:  
-        src: /etc/designate 
-        dest: /root/upgrade-venvs/configs
-        mode: pull
-        recursive: true
-        rsync_opts:
-          - "-a"
+#- name: Get config files from designate container
+#  hosts: designate_all[0]
+#  tasks:
+#    - synchronize:  
+#        src: /etc/designate 
+#        dest: /root/upgrade-venvs/configs
+#        mode: pull
+#        recursive: true
+#        rsync_opts:
+#          - "-a"
 
 - name: Get config files from heat container
   hosts: heat_all[0]
@@ -212,22 +213,22 @@
         dest: /var/log/neutron
         state: link
 
-    - name: remove directory if it exists
-      file:
-        path: /etc/designate
-        state: absent
+#    - name: remove directory if it exists
+#      file:
+#        path: /etc/designate
+#        state: absent
   
-    - name: Create symbolic link 
-      file:
-        src: /root/upgrade-venvs/configs/designate
-        dest: /etc/designate
-        state: link
+#    - name: Create symbolic link 
+#      file:
+#        src: /root/upgrade-venvs/configs/designate
+#        dest: /etc/designate
+#        state: link
 
-    - name: Create symbolic link 
-      file:
-        src: /root/upgrade-venvs/logs/designate
-        dest: /var/log/designate
-        state: link
+#    - name: Create symbolic link 
+#      file:
+#        src: /root/upgrade-venvs/logs/designate
+#        dest: /var/log/designate
+#        state: link
 
     - name: remove directory if it exists
       file:
