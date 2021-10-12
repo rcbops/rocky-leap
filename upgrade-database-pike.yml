@@ -32,6 +32,7 @@
 
     - name: Perform pike designate DB upgrade
       shell: "/root/upgrade-venvs/pike/bin/designate-manage database sync"
+      when: groups['designate_all'] | default('') |length > 0
 
     - name: Perform pike heat DB upgrade
       shell: "/root/upgrade-venvs/pike/bin/heat-manage db_sync"
