@@ -33,10 +33,10 @@
 
     - name: Install keystone requirements ocata
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/keystone/stable/ocata/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/keystone/ocata-em/requirements.txt
         virtualenv: /root/upgrade-venvs/ocata
         virtualenv_python: python2.7
-        extra_args: "{{ upgrade_pip_args | default('') }}"
+        extra_args: "--constraint /root/upgrades/ocata-constraints.txt {{ upgrade_pip_args | default('') }}"
 
     - name: Install keystone requirements ocata pymysql
       pip: 
@@ -47,10 +47,10 @@
 
     - name: Install keystone requirements pike
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/keystone/stable/pike/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/keystone/pike-em/requirements.txt
         virtualenv: /root/upgrade-venvs/pike
         virtualenv_python: python2.7
-        extra_args: "{{ upgrade_pip_args | default('') }}"
+        extra_args: "--constraint /root/upgrades/pike-constraints.txt {{ upgrade_pip_args | default('') }}"
 
     - name: Install keystone requirements pike pymysql
       pip: 
@@ -64,7 +64,7 @@
         requirements: https://raw.githubusercontent.com/openstack/keystone/stable/queens/requirements.txt
         virtualenv: /root/upgrade-venvs/queens
         virtualenv_python: python2.7
-        extra_args: "{{ upgrade_pip_args | default('') }}"
+        extra_args: "--constraint /root/upgrades/queens-constraints.txt {{ upgrade_pip_args | default('') }}"
 
     - name: Install keystone requirements queens pymysql
       pip: 
@@ -78,7 +78,7 @@
         requirements: https://raw.githubusercontent.com/openstack/keystone/stable/rocky/requirements.txt
         virtualenv: /root/upgrade-venvs/rocky
         virtualenv_python: python2.7
-        extra_args: "{{ upgrade_pip_args | default('') }}"
+        extra_args: "--constraint /root/upgrades/rocky-constraints.txt {{ upgrade_pip_args | default('') }}"
 
     - name: Install keystone requirements rocky pymysql
       pip: 
@@ -96,66 +96,66 @@
 
     - name: Install glance requirements pike
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/glance/stable/pike/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/glance/pike-em/requirements.txt
         virtualenv: /root/upgrade-venvs/pike
         virtualenv_python: python2.7
-        extra_args: "{{ upgrade_pip_args | default('') }}"
+        extra_args: "--constraint /root/upgrades/pike-constraints.txt {{ upgrade_pip_args | default('') }}"
 
     - name: Install glance requirements queens
       pip: 
         requirements: https://raw.githubusercontent.com/openstack/glance/stable/queens/requirements.txt
         virtualenv: /root/upgrade-venvs/queens
         virtualenv_python: python2.7
-        extra_args: "{{ upgrade_pip_args | default('') }}"
+        extra_args: "--constraint /root/upgrades/queens-constraints.txt {{ upgrade_pip_args | default('') }}"
 
     - name: Install glance requirements rocky
       pip: 
         requirements: https://raw.githubusercontent.com/openstack/glance/stable/rocky/requirements.txt
         virtualenv: /root/upgrade-venvs/rocky
         virtualenv_python: python2.7
-        extra_args: "{{ upgrade_pip_args | default('') }}"
+        extra_args: "--constraint /root/upgrades/rocky-constraints.txt {{ upgrade_pip_args | default('') }}"
 
     - name: Install cinder requirements ocata
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/cinder/stable/ocata/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/cinder/ocata-em/requirements.txt
         virtualenv: /root/upgrade-venvs/ocata
         virtualenv_python: python2.7
-        extra_args: "{{ upgrade_pip_args | default('') }}"
+        extra_args: "--constraint /root/upgrades/ocata-constraints.txt {{ upgrade_pip_args | default('') }}"
 
     - name: Install cinder requirements pike
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/cinder/stable/pike/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/cinder/pike-em/requirements.txt
         virtualenv: /root/upgrade-venvs/pike
         virtualenv_python: python2.7
-        extra_args: "{{ upgrade_pip_args | default('') }}"
+        extra_args: "--constraint /root/upgrades/pike-constraints.txt {{ upgrade_pip_args | default('') }}"
 
     - name: Install cinder requirements queens
       pip: 
         requirements: https://raw.githubusercontent.com/openstack/cinder/stable/queens/requirements.txt
         virtualenv: /root/upgrade-venvs/queens
         virtualenv_python: python2.7
-        extra_args: "{{ upgrade_pip_args | default('') }}"
+        extra_args: "--constraint /root/upgrades/queens-constraints.txt {{ upgrade_pip_args | default('') }}"
 
     - name: Install cinder requirements rocky
       pip: 
         requirements: https://raw.githubusercontent.com/openstack/cinder/stable/rocky/requirements.txt
         virtualenv: /root/upgrade-venvs/rocky
         virtualenv_python: python2.7
-        extra_args: "{{ upgrade_pip_args | default('') }}"
+        extra_args: "--constraint /root/upgrades/rocky-constraints.txt {{ upgrade_pip_args | default('') }}"
 
     - name: Install nova requirements ocata
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/nova/stable/ocata/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/nova/ocata-em/requirements.txt
         virtualenv: /root/upgrade-venvs/ocata
         virtualenv_python: python2.7
-        extra_args: "{{ upgrade_pip_args | default('') }}"
+        extra_args: "--constraint /root/upgrades/ocata-constraints.txt {{ upgrade_pip_args | default('') }}"
 
     - name: Install nova requirements pike
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/nova/stable/pike/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/nova/pike-em/requirements.txt
         virtualenv: /root/upgrade-venvs/pike
         virtualenv_python: python2.7
-        extra_args: "{{ upgrade_pip_args | default('') }}"
+        extra_args: "--constraint /root/upgrades/pike-constraints.txt {{ upgrade_pip_args | default('') }}"
 
     - name: Install more requirements pike
       pip: 
@@ -169,35 +169,35 @@
         requirements: https://raw.githubusercontent.com/openstack/nova/stable/queens/requirements.txt
         virtualenv: /root/upgrade-venvs/queens
         virtualenv_python: python2.7
-        extra_args: "{{ upgrade_pip_args | default('') }}"
+        extra_args: "--constraint /root/upgrades/queens-constraints.txt {{ upgrade_pip_args | default('') }}"
 
     - name: Install nova requirements rocky
       pip: 
         requirements: https://raw.githubusercontent.com/openstack/nova/stable/rocky/requirements.txt
         virtualenv: /root/upgrade-venvs/rocky
         virtualenv_python: python2.7
-        extra_args: "{{ upgrade_pip_args | default('') }}"
+        extra_args: "--constraint /root/upgrades/rocky-constraints.txt {{ upgrade_pip_args | default('') }}"
   
     - name: Install neutron requirements ocata
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/neutron/stable/ocata/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/neutron/ocata-em/requirements.txt
         virtualenv: /root/upgrade-venvs/ocata
         virtualenv_python: python2.7
-        extra_args: "{{ upgrade_pip_args | default('') }}"
+        extra_args: "--constraint /root/upgrades/ocata-constraints.txt {{ upgrade_pip_args | default('') }}"
 
     - name: Install neutron requirements pike
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/neutron/stable/pike/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/neutron/pike-em/requirements.txt
         virtualenv: /root/upgrade-venvs/pike
         virtualenv_python: python2.7
-        extra_args: "{{ upgrade_pip_args | default('') }}"
+        extra_args: "--constraint /root/upgrades/pike-constraints.txt {{ upgrade_pip_args | default('') }}"
 
     - name: Install neutron requirements queens
       pip: 
         requirements: https://raw.githubusercontent.com/openstack/neutron/stable/queens/requirements.txt
         virtualenv: /root/upgrade-venvs/queens
         virtualenv_python: python2.7
-        extra_args: "{{ upgrade_pip_args | default('') }}"
+        extra_args: "--constraint /root/upgrades/queens-constraints.txt {{ upgrade_pip_args | default('') }}"
   
     - name: Install more requirements queens
       pip: 
@@ -215,71 +215,71 @@
   
     - name: Install designate requirements ocata
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/designate/stable/ocata/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/designate/ocata-em/requirements.txt
         virtualenv: /root/upgrade-venvs/ocata
         virtualenv_python: python2.7
-        extra_args: "{{ upgrade_pip_args | default('') }}"
+        extra_args: "--constraint /root/upgrades/ocata-constraints.txt {{ upgrade_pip_args | default('') }}"
 
     - name: Install designate requirements pike
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/designate/stable/pike/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/designate/pike-em/requirements.txt
         virtualenv: /root/upgrade-venvs/pike
         virtualenv_python: python2.7
-        extra_args: "{{ upgrade_pip_args | default('') }}"
+        extra_args: "--constraint /root/upgrades/pike-constraints.txt {{ upgrade_pip_args | default('') }}"
   
     - name: Install designate requirements queens
       pip: 
         requirements: https://raw.githubusercontent.com/openstack/designate/stable/queens/requirements.txt
         virtualenv: /root/upgrade-venvs/queens
         virtualenv_python: python2.7
-        extra_args: "{{ upgrade_pip_args | default('') }}"
+        extra_args: "--constraint /root/upgrades/queens-constraints.txt {{ upgrade_pip_args | default('') }}"
   
     - name: Install designate requirements rocky
       pip: 
         requirements: https://raw.githubusercontent.com/openstack/designate/stable/rocky/requirements.txt
         virtualenv: /root/upgrade-venvs/rocky
         virtualenv_python: python2.7
-        extra_args: "{{ upgrade_pip_args | default('') }}"
+        extra_args: "--constraint /root/upgrades/rocky-constraints.txt {{ upgrade_pip_args | default('') }}"
   
     - name: Install heat requirements ocata
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/heat/stable/ocata/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/heat/ocata-em/requirements.txt
         virtualenv: /root/upgrade-venvs/ocata
         virtualenv_python: python2.7
-        extra_args: "{{ upgrade_pip_args | default('') }}"
+        extra_args: "--constraint /root/upgrades/ocata-constraints.txt {{ upgrade_pip_args | default('') }}"
 
     - name: Install heat requirements pike
       pip: 
-        requirements: https://raw.githubusercontent.com/openstack/heat/stable/pike/requirements.txt
+        requirements: https://raw.githubusercontent.com/openstack/heat/pike-em/requirements.txt
         virtualenv: /root/upgrade-venvs/pike
         virtualenv_python: python2.7
-        extra_args: "{{ upgrade_pip_args | default('') }}"
+        extra_args: "--constraint /root/upgrades/pike-constraints.txt {{ upgrade_pip_args | default('') }}"
   
     - name: Install heat requirements queens
       pip: 
         requirements: https://raw.githubusercontent.com/openstack/heat/stable/queens/requirements.txt
         virtualenv: /root/upgrade-venvs/queens
         virtualenv_python: python2.7
-        extra_args: "{{ upgrade_pip_args | default('') }}"
+        extra_args: "--constraint /root/upgrades/queens-constraints.txt {{ upgrade_pip_args | default('') }}"
   
     - name: Install heat requirements rocky
       pip: 
         requirements: https://raw.githubusercontent.com/openstack/heat/stable/rocky/requirements.txt
         virtualenv: /root/upgrade-venvs/rocky
         virtualenv_python: python2.7
-        extra_args: "{{ upgrade_pip_args | default('') }}"
+        extra_args: "--constraint /root/upgrades/rocky-constraints.txt {{ upgrade_pip_args | default('') }}"
   
     - name: Checkout keystone ocata
       git:
         repo: 'https://github.com/openstack/keystone.git'
         dest: /root/upgrade-venvs/ocata/src/keystone
-        version: stable/ocata
+        version: ocata-em
   
     - name: Checkout keystone pike
       git:
         repo: 'https://github.com/openstack/keystone.git'
         dest: /root/upgrade-venvs/pike/src/keystone
-        version: stable/pike
+        version: pike-em
   
     - name: Checkout keystone queens
       git:
@@ -297,13 +297,13 @@
       git:
         repo: 'https://github.com/openstack/glance.git'
         dest: /root/upgrade-venvs/ocata/src/glance
-        version: stable/ocata
+        version: ocata-em
   
     - name: Checkout glance pike
       git:
         repo: 'https://github.com/openstack/glance.git'
         dest: /root/upgrade-venvs/pike/src/glance
-        version: stable/pike
+        version: pike-em
   
     - name: Checkout glance queens
       git:
@@ -321,13 +321,13 @@
       git:
         repo: 'https://github.com/openstack/cinder.git'
         dest: /root/upgrade-venvs/ocata/src/cinder
-        version: stable/ocata
+        version: ocata-em
   
     - name: Checkout cinder pike
       git:
         repo: 'https://github.com/openstack/cinder.git'
         dest: /root/upgrade-venvs/pike/src/cinder
-        version: stable/pike
+        version: pike-em
   
     - name: Checkout cinder queens
       git:
@@ -345,13 +345,13 @@
       git:
         repo: 'https://github.com/openstack/nova.git'
         dest: /root/upgrade-venvs/ocata/src/nova
-        version: stable/ocata
+        version: ocata-em
   
     - name: Checkout nova pike
       git:
         repo: 'https://github.com/openstack/nova.git'
         dest: /root/upgrade-venvs/pike/src/nova
-        version: stable/pike
+        version: pike-em
   
     - name: Checkout nova queens
       git:
@@ -369,13 +369,13 @@
       git:
         repo: 'https://github.com/openstack/neutron.git'
         dest: /root/upgrade-venvs/ocata/src/neutron
-        version: stable/ocata
+        version: ocata-em
   
     - name: Checkout neutron pike
       git:
         repo: 'https://github.com/openstack/neutron.git'
         dest: /root/upgrade-venvs/pike/src/neutron
-        version: stable/pike
+        version: pike-em
   
     - name: Checkout neutron queens
       git:
@@ -393,13 +393,13 @@
       git:
         repo: 'https://github.com/openstack/designate.git'
         dest: /root/upgrade-venvs/ocata/src/designate
-        version: stable/ocata
+        version: ocata-em
   
     - name: Checkout designate pike
       git:
         repo: 'https://github.com/openstack/designate.git'
         dest: /root/upgrade-venvs/pike/src/designate
-        version: stable/pike
+        version: pike-em
   
     - name: Checkout designate queens
       git:
@@ -417,13 +417,13 @@
       git:
         repo: 'https://github.com/openstack/heat.git'
         dest: /root/upgrade-venvs/ocata/src/heat
-        version: stable/ocata
+        version: ocata-em
   
     - name: Checkout heat pike
       git:
         repo: 'https://github.com/openstack/heat.git'
         dest: /root/upgrade-venvs/pike/src/heat
-        version: stable/pike
+        version: pike-em
   
     - name: Checkout heat queens
       git:
