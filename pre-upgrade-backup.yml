@@ -6,4 +6,4 @@
     - "/root/upgrades/defaults.yml"
   tasks:
     - name: Dump database
-      shell: "mysqldump --all-databases > {{ dbdump_dir }}/newton-database.save"
+      shell: "mysqldump --single-transaction --all-databases > {{ dbdump_dir }}/newton-database.save"

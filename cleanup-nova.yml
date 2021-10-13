@@ -10,7 +10,7 @@
         /opt/openstack-ansible/scripts/inventory-manage.py -r {{ item }}
       with_items: "{{ groups['nova_api_metadata_container'] +
                       groups['nova_api_os_compute_container'] +
-                      groups['nova_api_placement_container'] +
+                      groups['nova_api_placement_container'] |default([]) +
                       groups['nova_conductor_container'] +
                       groups['nova_console_container'] +
                       groups['nova_scheduler_container'] }}"

@@ -6,7 +6,7 @@
     - "/root/upgrades/defaults.yml"
   tasks:
     - name: Dump database
-      shell: "mysqldump --all-databases > {{ dbdump_dir }}/rocky-database.save"
+      shell: "mysqldump --single-transaction --all-databases > {{ dbdump_dir }}/rocky-database.save"
 
 - name: start all containers
   hosts: all_containers
