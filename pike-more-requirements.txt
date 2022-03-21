@@ -153,7 +153,7 @@ urllib3==1.22
 uWSGI==2.0.18
 vine==1.1.4
 voluptuous==0.10.5
-waitress==1.0.2
+waitress==2.1.1
 warlock==1.2.0
 weakrefmethod==1.0.3
 WebOb==1.7.3
