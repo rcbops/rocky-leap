@@ -84,7 +84,7 @@ os-win==2.2.1
 os-xenapi==0.2.0
 ovs==2.7.0
 ovsdbapp==0.4.4
-paramiko==2.2.1
+paramiko==2.10.1
 Paste==2.0.3
 PasteDeploy==1.5.2
 pbr==3.1.1
