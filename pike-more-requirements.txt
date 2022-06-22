@@ -55,7 +55,7 @@ netaddr==0.7.19
 netifaces==0.10.6
 networkx==1.11
 neutron-lib==1.9.2
-numpy==1.13.1
+numpy==1.22.0
 openstacksdk==0.9.17
 os-brick==1.15.9
 osc-lib==1.7.1
