@@ -35,7 +35,7 @@ keystoneauth1==2.18.0
 keystonemiddleware==4.14.0
 kombu==3.0.37
 logutils==0.3.3
-lxml==3.7.2
+lxml==4.9.1
 Mako==1.0.6
 MarkupSafe==0.23
 monotonic==1.2
