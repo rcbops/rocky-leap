@@ -6,7 +6,7 @@
     - "/root/upgrades/defaults.yml"
   tasks:
     - name: Bring in database
-      shell: "mysql < {{ dbdump_dir }}/rocky-database.save"
+      shell: "mysql < {{ dbdump_dir }}/train-database.save"
 
 - name: Prepare Permissions
   hosts: galera_all[0]
@@ -32,3 +32,15 @@
         path: /var/log/glance
         state: directory
         mode: 0777
+
+- name: Clean up old virtual environments
+  hosts: os-infra_hosts
+  tasks:
+    - name: Remove /openstack/venvs
+      file:
+        state: absent
+        path: /openstack/venvs
+    - name: Create venv path 
+      file:
+        state: directory
+        path: /openstack/venvs

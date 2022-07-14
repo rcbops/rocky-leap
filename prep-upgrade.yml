@@ -1,12 +1,3 @@
-- name: CLean up keystone admin endpoint
-  hosts: utility_all[0]
-  tasks:
-    - name: Create nova placement project
-      shell: ". /root/openrc;openstack project create placement"
-
-    - name: Delete keystone admin endpoint
-      shell: ". /root/openrc;openstack endpoint delete $(. /root/openrc;openstack endpoint list | grep identity | grep admin | awk '{print $2}')"
-
 - name: Prep out machines for upgrade
   hosts: all
   gather_facts: false
@@ -37,15 +28,10 @@
         state: absent
         path: /root/.pip
 
-# if customer has 'nova_nova_conf_overrides' or 'neutron_neutron_conf_overrides' in any override files, this will negate them
-#- name: Install rabbit overrides
-#  hosts: localhost
-#  gather_facts: false
-#  tasks:
-#    - name: Copy override file to openstack_deploy
-#      copy:
-#        src: /root/upgrades/rabbit_overrides.yml
-#        dest: /etc/openstack_deploy/rabbit_overrides.yml
-#        owner: root
-#        group: root
-#        mode: '0644'
+    - name: Add trusted servers to pip
+      copy:
+        src: /root/upgrades/pip.conf
+        dest: /etc/pip.conf
+        owner: root
+        group: root
+        mode: '0644'

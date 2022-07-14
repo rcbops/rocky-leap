@@ -1,4 +1,0 @@
-rsa==3.4.2
-pysaml2==4.5.0
-SQLAlchemy==1.2.10
-alembic==1.0.0

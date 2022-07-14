@@ -1,4 +1,4 @@
-<pre>Upgrades Newton to Rocky JCB style
+<pre>Upgrades Rocky to Victoria JCB style
 
 ////////////////////////////////////////////////////////////////////////////////
 // PRE SCHEDULING REQUIREMENTS
@@ -29,7 +29,7 @@
    A host OS upgrade to Xenial will need to be scheduled.
 
 ////////////////////////////////////////////////////////////////////////////////
-// Maintenance Template for upgrading RPC Newton to openstack-Ansible Rocky release
+// Maintenance Template for upgrading OpenStack-Ansible Rocky to openstack-Ansible Victoria release
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -37,7 +37,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
  (1) Maintenance objective:
-    - Update Newton (RPC14) to Rocky (OSA 18) version
+    - Update Rocky to Victoria
 
  (1a) What should we check to confirm the solution is functioning as expected?
     - Environment is running a RPC18, Rocky version

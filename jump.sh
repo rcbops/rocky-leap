@@ -55,10 +55,7 @@ function upgrade_database {
     RUN_TASKS+=("/root/upgrades/build-configs.yml")
     RUN_TASKS+=("/root/upgrades/build-venvs.yml")
     RUN_TASKS+=("/root/upgrades/shutdown-containers.yml")
-    RUN_TASKS+=("/root/upgrades/upgrade-database-ocata.yml")
-    RUN_TASKS+=("/root/upgrades/upgrade-database-pike.yml")
-    RUN_TASKS+=("/root/upgrades/upgrade-database-queens.yml")
-    RUN_TASKS+=("/root/upgrades/upgrade-database-rocky.yml")
+    RUN_TASKS+=("/root/upgrades/upgrade-database-train.yml")
     RUN_TASKS+=("/root/upgrades/post-upgrade-backup.yml")
     for item in ${!RUN_TASKS[@]}; do
       run_lock $item "${RUN_TASKS[$item]}"
@@ -82,19 +79,9 @@ function pre_flight {
     pushd /opt/openstack-ansible
         git stash
         git checkout master
+	git pull
         git fetch && git fetch --tags
-        git checkout stable/rocky
-        git pull
-
-        sed -i -e 's|^neutron_vpnaas_git_install_branch:.*|neutron_vpnaas_git_install_branch: 13.0.0|g' \
-           /opt/openstack-ansible/playbooks/defaults/repo_packages/openstack_services.yml
-
-        sed -i -e 's|^dragonflow_git|#dragonflow_git|g' \
-           /opt/openstack-ansible/playbooks/defaults/repo_packages/openstack_services.yml \
-           /etc/ansible/roles/os_neutron/defaults/main.yml
-
-        sed -i -e 's|^octavia_dashboard_git_install_branch:.*|octavia_dashboard_git_install_branch: 2.0.1|g' \
-           /opt/openstack-ansible/playbooks/defaults/repo_packages/openstack_services.yml
+        git checkout victoria-em
 
         echo "Waiting for containers to start up"
         sleep 2m
@@ -109,15 +96,9 @@ function main {
     pushd /opt/openstack-ansible
         cp /opt/openstack-ansible/inventory/env.d/nova.yml /etc/openstack_deploy/env.d
 
-        RUN_TASKS=("/opt/openstack-ansible/scripts/upgrade-utilities/playbooks/user-secrets-adjustment.yml")
         RUN_TASKS+=("/opt/openstack-ansible/playbooks/lxc-containers-destroy.yml -e force_containers_destroy=true -e force_containers_data_destroy=true")
-        RUN_TASKS+=("/root/upgrades/cleanup-for-bm.yml")
-        RUN_TASKS+=("/root/upgrades/cleanup-heat.yml")
-        RUN_TASKS+=("/root/upgrades/cleanup-ironic.yml")
-        RUN_TASKS+=("/root/upgrades/cleanup-nova.yml")
         RUN_TASKS+=("/root/upgrades/deploy-config-changes.yml")
         RUN_TASKS+=("/opt/openstack-ansible/playbooks/setup-hosts.yml -f 50 -l '!compute_all'")
-        RUN_TASKS+=("/root/upgrades/venv_install.yml")
         RUN_TASKS+=("/opt/openstack-ansible/playbooks/setup-infrastructure.yml -f 50 -l '!compute_all'")
         RUN_TASKS+=("/root/upgrades/install_db.yml")
         RUN_TASKS+=("/opt/openstack-ansible/playbooks/setup-openstack.yml -f 50 -l '!compute_all'")
@@ -128,6 +109,6 @@ function main {
     popd
 }
 
-TARGET_SERIES="rocky"
+TARGET_SERIES="victoria"
 upgrade_database
 main

@@ -1,20 +1,5 @@
 ---
 
-- name: Prepare MQ/DB services
-  hosts: localhost
-  vars_files:
-    - "/root/upgrades/defaults.yml"
-  tasks:
-    - name: Prep database dump for version change
-      copy:
-        dest: "{{ dbdump_dir }}/train-database.save"
-        content: |
-          DROP TABLE IF EXISTS `mysql`.`global_priv`;
-          DROP VIEW IF EXISTS `mysql`.`user`;
-
-    - name: Dump database
-      shell: "mysqldump --single-transaction --all-databases >> {{ dbdump_dir }}/train-database.save"
-
 - name: start all containers
   hosts: all_containers
   gather_facts: false

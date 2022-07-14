@@ -1,0 +1,38 @@
+---
+
+- name: Prepare Virt Environments
+  hosts: localhost
+  tasks:
+          #    - name: Perform ussuri Keystone DB sync
+          #      shell: "/root/upgrade-venvs/ussuri/bin/keystone-manage --nouse-journal --log-file=/var/log/keystone/keystone.log db_sync"
+
+    - name: Perform ussuri glance DB sync
+      shell: "/root/upgrade-venvs/ussuri/bin/glance-manage db sync"
+
+    - name: Perform ussuri cinder DB sync
+      shell: "/root/upgrade-venvs/ussuri/bin/cinder-manage --nouse-journal --log-file=/var/log/cinder/cinder.log db sync"
+
+    - name: Perform online data migrations ussuri cinder
+      shell: "/root/upgrade-venvs/ussuri/bin/cinder-manage --nouse-journal --log-file=/var/log/cinder/cinder.log db online_data_migrations"
+
+    - name: Perform ussuri Nova API DB sync
+      shell: "/root/upgrade-venvs/ussuri/bin/nova-manage --nouse-journal --log-file=/var/log/nova/nova.log api_db sync"
+
+    - name: Perform ussuri Nova DB sync
+      shell: "/root/upgrade-venvs/ussuri/bin/nova-manage --nouse-journal --log-file=/var/log/nova/nova.log db sync"
+
+    - name: Perform ussuri online data migrations
+      shell: "/root/upgrade-venvs/ussuri/bin/nova-manage --nouse-journal --log-file=/var/log/nova/nova.log db online_data_migrations"
+
+    - name: Perform ussuri neutron DB upgrade
+      shell: "/root/upgrade-venvs/ussuri/bin/neutron-db-manage upgrade --expand"
+
+    - name: Perform ussuri neutron DB offline migrations
+      shell: "/root/upgrade-venvs/ussuri/bin/neutron-db-manage has_offline_migrations"
+
+      #    - name: Perform ussuri designate DB upgrade
+      #      shell: "/root/upgrade-venvs/ussuri/bin/designate-manage database sync"
+      #      when: groups['designate_all'] | default('') |length > 0
+
+      #    - name: Perform ussuri heat DB upgrade
+      #      shell: "/root/upgrade-venvs/ussuri/bin/heat-manage db_sync"
