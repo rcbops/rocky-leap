@@ -75,7 +75,7 @@ oslo.reports==1.22.2
 oslo.rootwrap==5.9.3
 oslo.serialization==2.20.3
 oslo.service==1.25.2
-oslo.utils==3.28.4
+oslo.utils==4.10.1
 oslo.versionedobjects==1.26.3
 osprofiler==1.11.1
 os-traits==0.3.4
