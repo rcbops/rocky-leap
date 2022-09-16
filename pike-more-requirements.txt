@@ -46,7 +46,7 @@ kombu==4.1.0
 linecache2==1.0.0
 logutils==0.3.5
 lxml==3.8.0
-Mako==1.0.7
+Mako==1.2.2
 MarkupSafe==1.0
 microversion-parse==0.1.4
 monotonic==1.3
