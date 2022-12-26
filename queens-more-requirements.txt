@@ -132,5 +132,5 @@ warlock==1.2.0
 weakrefmethod==1.0.3
 WebOb==1.7.4
 WebTest==2.0.29
-wheel==0.31.1
+wheel==0.38.1
 wrapt==1.10.11
