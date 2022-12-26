@@ -159,7 +159,7 @@ weakrefmethod==1.0.3
 WebOb==1.7.3
 websockify==0.8.0
 WebTest==2.0.27
-wheel==0.31.0
+wheel==0.38.1
 wrapt==1.10.10
 wrapt==1.10.10 
 ws4py==0.4.2
