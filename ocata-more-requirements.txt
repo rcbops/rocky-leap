@@ -106,7 +106,7 @@ rfc3986==0.4.1
 Routes==2.4.1
 ryu==4.18
 semantic-version==2.6.0
-setuptools==38.5.0
+setuptools==65.5.1
 simplegeneric==0.8.1
 simplejson==3.10.0
 singledispatch==3.4.0.3
