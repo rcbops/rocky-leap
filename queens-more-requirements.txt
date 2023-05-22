@@ -104,7 +104,7 @@ python-novaclient==10.1.0
 pytz==2017.3
 PyYAML==3.12
 repoze.lru==0.7
-requests==2.18.4
+requests==2.31.0
 requestsexceptions==1.4.0
 rfc3986==1.1.0
 Routes==2.4.1
